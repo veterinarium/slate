@@ -2,6 +2,21 @@
 
 Hospitalization is an abstraction used in Smart Flow Sheet to represent the patient record. As soon as patient is admitted in the hospital the Hospitalization object is created. In turn, the hospitalization object nests patient and client information. This information can be transferred and retrieved from SFS using the patient object and the client object.   
 
+The are the `hospitalizations` and `hospitalization` objects used to create hosptitalizations in SFS and receiving events from the Smart Flow Sheet services.
+
+## The hospitalizations object
+
+### Attributes
+
+Parameter | Type | Description
+---------- | ------- | -------
+**objectType** | String | *Optional*. Describes the type of the object transferred with the SFS events. Should be assigned `hospitalizations` value
+**id** | String | *Optional*. Identificator of the object. Will be transferred to EMR with the SFS events 
+**hospitalizations** | Array | The array of [`hospitalization`](#the-hospitalization-object) objects. 
+
+
+This object will be sent with the `hospitalizations.discharged` event in case when multiple patients were [discharged](#recieving-hospitalization-report) from the Smart Flow Sheet whiteboard.
+
 ## The hospitalization object
 
 ### Attributes
@@ -18,12 +33,13 @@ Parameter | Type | Description
 **weightUnits** | String | *Optional*. Units for the weight. Can be `kg` or `lbs`. If not specified then clinic’s default weight units will be used
 **weight** | Double | **Required**. Weight of the patient. Smart Flow Sheet requires weight to be specified for every patient from the moment hospitalization is created
 **estimatedDaysOfStay** | Integer | *Optional*. This value will be used to create requested number of days of hospitalization. If this value is not specified then by default 2 days will be created
-**emrFileNumber** | String | *Optional*. The value of emr file number, that will be shown on a flowsheet.
+**emrFileNumber** | String | *Optional*. The value of emr file number, that will be shown on a flowsheet
 **caution** | Boolean | *Optional*. Whether to show `caution stripe` on a flowsheet or not
 **dnr** | Boolean | *Optional*. Whether to show `dnr stripe` on a flowsheet or not
 **doctorName** | String | *Optional*. The name of the doctor on duty
-**diseases** | Array | *Optional*. Array of strings. A collection of diseases.
-**patient** | Patient | *Required when creating new hospitalization. Optional if used to updated existing hospitalization*. The `patient` object
+**diseases** | Array | *Optional*. Array of strings. A collection of diseases
+**reportPath** | String | *Optional*. The path to the flowsheet report file that has been generated during patient discharge
+**patient** | Patient | *Required when creating new hospitalization. Optional if used to update existing hospitalization*. The [`patient`](#the-patient-object) object
 
 ## The patient object
 
@@ -41,7 +57,7 @@ Parameter | Type | Description
 **breed** | String | *Optional*. Patient's breed
 **criticalNotes** | String | *Optional*. The value of the critical notes that will be shown on a flowsheet.
 **customField** | String | *Optional*. The value of the custom field that will be shown on a flowsheet.
-**owner** | Client | *Required when creating new hospitalization. Optional if used to updated existing hospitalization*. The `client` object
+**owner** | Client | *Required when creating new hospitalization. Optional if used to update existing hospitalization*. The [`client`](#the-client-object) object
 
 ## The client object
 
@@ -72,7 +88,7 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 {
 	"objectType": "hospitalization",
 	"hospitalizationId": "emr-hospitalization-id",
-	"dateCreated": "2014-11-03T17:54:55.221+02:00",
+	"dateCreated": "2014-11-03T17:54:55.221+00:00",
 	"temperatureUnits": "C",
 	"weightUnits": "kg",
 	"weight": 5.8,
@@ -122,4 +138,36 @@ This method deletes hospitalization by id. Specify the `id` of the hospitalizati
 * Synchronous
 * If hospitalization cannot be found in SFS, the [`Error`](#the-error-object) object will be returned with HTTP 404 status code
 
+## Receiving hospitalization report
+
+> Example of `hospitalizations.discharged` event JSON:
+
+```json
+{
+    "clinicApiKey": "clinic-api-key",
+    "eventType": "hospitalizations.discharged",
+    "object": {
+	    "objectType": "hospitalizations",
+		"id": "sfs-operation-id",
+		"hospitalizations": [
+			{
+				"objectType": "hospitalization",
+				"hospitalizationId": "emr-hospitalization-id",
+				"hospitalizationGuid": "sfs-hospitalization-guid",
+				"dateCreated": "2014-11-05T10:20:19.000+00:00",
+				"fileNumber": "#File number",
+				"reportPath": "https://pdf-report-webfile-path"
+			}
+		]
+	}
+}
+```
+
+As soon as one or several patients have been discharged from the Smart Flow Sheet whiteboard, SFS will notify EMR by sending one of the following events:
+
+1. The `hospitalization.discharged` event in case if single patient was discharged. In this case the [hospitalization](#the-hospitalization-object) object will be transferred with the event.
+
+2. The `hospitalizations.discharged` event in case if multiple patients were discharged. In this case the [hospitalizations](#the-hospitalizations-object) object will be transferred with the event.
+
+Every `hospitalization` object transferred with these events will contain the path to the flowsheet report pdf file in the `reportPath` field.
 

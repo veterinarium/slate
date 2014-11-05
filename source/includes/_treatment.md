@@ -14,7 +14,7 @@ Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | *Optional*. Describes the type of the object transferred with the SFS events (e.g. `treatment.record_entered`). Should be assigned `treatments` value
 **id** | String | **Required if sent to `/treatments` API method**. Identificator of the object. Will be transferred to EMR with the `treatments.records_entered` event. EMR should return this field with the `/treatments` API method
-**treatments** | Array | The array of `treatment` objects. See description of `treatments` object [below](#the-treatment-object)
+**treatments** | Array | The array of `treatment` objects. See description of the `treatments` object [below](#the-treatment-object)
 
 
 ## The treatment object
@@ -34,6 +34,8 @@ Parameter | Type | Description
 **volume** | Double | The volume of the medication that has been given to a patient. In case of non-medication treatment this value will not be provided.
 **units** | String | The units of the medication volume (ml, tab, etc). For non-medication items this value will not be provided
 **value** | String | The string value that was entered during treatment execution
+**mediaPath** | String | The path to the media file that has been attached to the treatment
+**mediaContentType** | String | The content type of media file (e.g. `image/jpg`, `video/mp4`, etc...)
 **doctorName** | String | The name of the doctor on duty. This value will be provided only in case if the name of the doctor is specified on a correspondent flowsheet
 **asyncOperationStatus** | Integer | **Required if sent to `/treatments` API method**. This field should be filled in by EMR when sending the `treatments` object with the `/treatments` API method. This is usually happens in response to the `treatments.records_entered` async event. This field describes the status of the asynchronous operation for each treatment.  Should be: 1. `less than 0` - error occured; 2. `greater or equal 0` - operation succeed.
 **asyncOperationMessage** | String | *Optional*. May contain the error message in case the `asyncOperationStatus` field represents the error (less than 0).
@@ -57,6 +59,8 @@ Parameter | Type | Description
 		"qty": 3.5,
 		"volume": 3.5,
 		"value": "IZ",
+		"mediaPath": "https://attached-image-webfile-path",
+		"mediaContentType": "image/jpg",
 		"units": "ml",
 		"doctorName": "name-of-the-doctor",
 		"asyncOperationStatus": -1,
@@ -90,7 +94,7 @@ The `treatment.record_entered` event is sent from SFS when one medical record ha
 	            "objectType": "treatment",
 	            "name": "Cefazolin 100",
 	            "inventoryId": "external-inventory-id",
-	            "hospitalizationId": "external-hospitalization-id1",
+	            "hospitalizationId": "external-hosp-id1",
 	            "treatmentGuid": "sfs-treatment-guid1",
 	            "time":"2013-03-28T14:23:56.000+00:00",
 	            "status": "changed",
@@ -104,7 +108,7 @@ The `treatment.record_entered` event is sent from SFS when one medical record ha
 	            "objectType": "treatment",
 	            "name": "Temperature",
 	            "inventoryId": null,
-	            "hospitalizationId": "external-hospitalization-id2",
+	            "hospitalizationId": "external-hosp-id2",
 	            "treatmentGuid": "sfs-treatment-guid2",
 	            "time":"2013-03-28T14:23:56.000+00:00",
 	            "status": "added",
@@ -151,7 +155,7 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 			"objectType": "treatment",
 			"name": "Cefazolin 100",
 			"inventoryId": "external-inventory-id",
-			"hospitalizationId": "external-hospitalization-id1",
+			"hospitalizationId": "external-hosp-id1",
 			"treatmentGuid": "sfs-treatment-guid1",
 			"time":"2013-03-28T14:23:56.000+00:00",
 			"status": "changed",
@@ -167,7 +171,7 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 			"objectType": "treatment",
 			"name": "Temperature",
 			"inventoryId": null,
-			"hospitalizationId": "external-hospitalization-id2",
+			"hospitalizationId": "external-hosp-id2",
 			"treatmentGuid": "sfs-treatment-guid2",
 			"time":"2013-03-28T14:23:56.000+00:00",
 			"status": "added",

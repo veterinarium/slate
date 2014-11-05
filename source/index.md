@@ -12,8 +12,8 @@ includes:
   - usecases
   - auth
   - errors
-  - inventory
   - hospitalization
+  - inventory
   - treatment
   - events
 

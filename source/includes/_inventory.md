@@ -12,6 +12,7 @@ The are the `inventoryitems` and `inventoryitem` objects used to import inventor
     "id": "some-operation-id",
     "inventoryitems": [
 		{
+			"objectType": "inventoryitem",
 	        "id": "some-emr-internal-id",
 	        "name": "Cefazolin 100",
 	        "concentration": 100,
@@ -19,6 +20,7 @@ The are the `inventoryitems` and `inventoryitem` objects used to import inventor
 	        "concentrationVolume": "ml"
 		},
 		{
+			"objectType": "inventoryitem",
 	        "id": "some-emr-internal-id2",
 	        "name": "Ampicillin"
 		}
@@ -34,7 +36,7 @@ Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | *Optional*. Describes the type of the object transferred with the SFS events (e.g. `inventory.imported`). Should be assigned `iventoryitems` value
 **id** | String | *Optional*. Identificator of the object. Will be transferred to EMR with the SFS events (e.g. `inventory.imported`)
-**inventoryitems** | Array | The array of `inventoryitem` objects. See description of `inventoryitem` object [below](#the-inventoryitem-object)
+**inventoryitems** | Array | The array of `inventoryitem` objects. See description of the `inventoryitem` object [below](#the-inventoryitem-object)
 
 
 ## The inventoryitem object
@@ -171,6 +173,7 @@ This method deletes an inventory item by id.
 		"id": "some-emr-internal-id",
 		"inventoryitems": [
 			{
+			    "objectType": "inventoryitem",
 		        "id": "some-emr-internal-id",
 		        "name": "Cefazolin 100",
 		        "concentration": 100,
@@ -179,6 +182,7 @@ This method deletes an inventory item by id.
 		        "asyncOperationStatus": 0
 			},
 			{
+			    "objectType": "inventoryitem",
 		        "id": "some-emr-internal-id2",
 		        "name": "Ampicillin",
 		        "asyncOperationStatus": -1,
@@ -194,6 +198,6 @@ SFS will send the `inventoryitems.imported` event to the url provided by EMR at 
 * Url: webhook provided by EMR
 * Method: POST
 * Synchronous
-* Transferres [`inventoryitems`](#the-inventoryitems-object) object included in “event” object
+* Transferres [`inventoryitems`](#the-inventoryitems-object) object included in the `event` object
 * Expected response with 200 Http code in case of success.
 * In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object
