@@ -131,9 +131,9 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 
 ## Delete hospitalization
 
-This method deletes hospitalization by id. Specify the `id` of the hospitalization object in the EMR. The same `id` that was supplied when hospitalization has been created 
+This method deletes hospitalization by id. Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created. 
 
-* Url: /hospitalization/{id}
+* Url: /hospitalization/{hospitalizationId}
 * Method: DELETE
 * Synchronous
 * If hospitalization cannot be found in SFS, the [`Error`](#the-error-object) object will be returned with HTTP 404 status code
@@ -170,4 +170,54 @@ As soon as one or several patients have been discharged from the Smart Flow Shee
 2. The `hospitalizations.discharged` event in case if multiple patients were discharged. In this case the [hospitalizations](#the-hospitalizations-object) object will be transferred with the event.
 
 Every `hospitalization` object transferred with these events will contain the path to the flowsheet report pdf file in the `reportPath` field.
+
+## Download the Medical Records report
+
+> Example Request:
+
+```http
+POST /hospitalization/emr-hospitalization-id/medicalrecordsreport HTTP/1.1
+User-Agent: MyClient/1.0.0
+Accept: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
+```
+
+This method allows to download the medical record report from Smart Flow Sheet. Use this method when receiving `hospitalizations.discharged` event, as at this point the report should contain all medical records of the specified hospitalization. 
+
+All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: Europe/Helsinki`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
+
+Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
+
+* Url: /hospitalization/{hospitalizationId}/medicalrecordsreport
+* Method: GET
+* Synchronous
+* Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value
+* In case of error returns the [`Error`](#the-error-object) object
+
+## Download the Inventory report
+
+> Example Request:
+
+```http
+POST /hospitalization/emr-hospitalization-id/inventoryreport HTTP/1.1
+User-Agent: MyClient/1.0.0
+Accept: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: America/Chicago
+```
+
+This method allows to download the inventory report from Smart Flow Sheet. Use this method when receiving `hospitalizations.discharged` event, as at this point the report should contain the complete inventory usage information of the specified hospitalization. 
+
+All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: America/Chicago`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
+
+Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
+
+* Url: /hospitalization/{hospitalizationId}/inventoryreport
+* Method: GET
+* Synchronous
+* Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value
+* In case of error returns the [`Error`](#the-error-object) object
 

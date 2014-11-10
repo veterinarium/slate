@@ -6,6 +6,7 @@ language_tabs:
   
 toc_footers:
   - <a href='mailto:info@smartflowsheet.com'>Sign Up for API Keys</a>
+  - <a href='https://github.com/veterinarium/public-sfs'>Sample Project</a>
 
 includes:
   - intro

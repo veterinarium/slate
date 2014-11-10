@@ -1,6 +1,14 @@
 # Basic Use-Cases
 
+> Sample Project:
+
+```shell
+https://github.com/veterinarium/public-sfs
+```
+
 This section describes the basic integration workflows.  
+
+Please download a sample project from GitHub that contains several examples of the SFS API usage.
 
 ## Inventory Import
 
