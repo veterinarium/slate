@@ -30,6 +30,10 @@ Your API keys carry many privileges, so be sure to keep them secret!
 
 You can find the API endpoints for sandbox and production in `Details` section in the right part of this page.
 
+<aside class="notice">
+You may also register a custom webhook per each clinic account (see [Register custom webhook](#register-custom-webhook) for more information). 
+</aside>
+
 ## Clinic Setup
 
 > Sandbox Home and Account pages:

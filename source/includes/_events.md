@@ -10,7 +10,7 @@ In the future there can be other events added to this, e.g. sending flowsheet re
 
 Events will be sent only for those hospitalizations that have been created from EMR. Events on hospitalizations created directly from SFS won`t be sent to EMR webhook. 
 
-Sending events require webhook to be registered in SFS. Requirements to webhook:
+Sending events require webhook to be registered in SFS. You may register a webhook that will receive all the events associated with your EMR, or you may [register a custom webhook](#register-custom-webhook) for each clinic account. Requirements to webhook:
 
 * HTTP POST method
 * Accepts json object of the [`Event`](the-event-object) type
@@ -53,3 +53,25 @@ Event | Description
 **inventoryitems.imported** | Sent after importing of emr inventory items finished
 **treatment.record_entered** | Sent from SFS when one medical record has been entered/removed
 **treatments.records_entered** | Sent from SFS when multiple medical records have been entered/removed
+
+
+## Register custom webhook
+
+> Example Request:
+
+```http
+POST /account/webhook?url=your_custom_url HTTP/1.1
+User-Agent: MyClient/1.0.0
+Accept: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+```
+
+You may use this API to register a custom webhook that will receive events only for the specified clinic account. You may use this webhook for a group of clinics also. 
+
+* Url: /account/webhook?url=your_custom_url
+* Method: POST
+* Synchronous
+* Url parameters: `url` string. The body of HTTP request should remain empty
+* Returns HTTP status 200 in case the new webhook has been registered
+* In case of error returns the [`Error`](#the-error-object) object
