@@ -51,6 +51,7 @@ Event | Description
 **hospitalization.discharged** | Sent after a patient has been discharged from the Smart Flow Sheet whiteboard
 **hospitalizations.discharged** | Sent after multiple patients have been discharged from the Smart Flow Sheet whiteboard
 **inventoryitems.imported** | Sent after importing of emr inventory items finished
+**medics.imported** | Sent after importing of emr medics finished
 **treatment.record_entered** | Sent from SFS when one medical record has been entered/removed
 **treatments.records_entered** | Sent from SFS when multiple medical records have been entered/removed
 

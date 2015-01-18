@@ -1,6 +1,6 @@
 # Inventory Items
 
-The are the `inventoryitems` and `inventoryitem` objects used to import inventory from EMR to SFS.
+There are the `inventoryitems` and `inventoryitem` objects used to import inventory from EMR to SFS.
 
 ## The inventoryitems object
 

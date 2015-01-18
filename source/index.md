@@ -15,6 +15,7 @@ includes:
   - errors
   - hospitalization
   - inventory
+  - medic
   - treatment
   - events
 

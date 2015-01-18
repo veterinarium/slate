@@ -37,6 +37,7 @@ Parameter | Type | Description
 **caution** | Boolean | *Optional*. Whether to show `caution stripe` on a flowsheet or not
 **dnr** | Boolean | *Optional*. Whether to show `dnr stripe` on a flowsheet or not
 **doctorName** | String | *Optional*. The name of the doctor on duty
+**medicId** | String | *Optional*. Alternatively to specifying the `doctorName` field, you can provide the id of the [`medic`](#the-medic-object) object that corresponds to the doctor on duty, and has been registered with the [`appropriate API`](#create-or-update-single-medic) call
 **diseases** | Array | *Optional*. Array of strings. A collection of diseases
 **reportPath** | String | *Optional*. The path to the flowsheet report file that has been generated during patient discharge
 **patient** | Patient | *Required when creating new hospitalization. Optional if used to update existing hospitalization*. The [`patient`](#the-patient-object) object
@@ -96,7 +97,8 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 	"fileNumber": "# 123",
 	"dnr": true,
 	"caution": false,
-	"doctorName": "Dr. Ivan Zak",
+	"doctorName": "Dr. Ivan",
+	"medicId": "dr-ivan-emr-id",
 	"diseases": [
 		"high temperature",
 		"vomiting"
