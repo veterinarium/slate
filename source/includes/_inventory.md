@@ -61,7 +61,7 @@ Parameter | Type | Description
 ```http
 POST /inventoryitem HTTP/1.1
 User-Agent: MyClient/1.0.0
-Accept: application/json
+Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 ```
@@ -91,7 +91,7 @@ Creates or updates single inventory item sent in the request. SFS will attempt t
 ```http
 POST /inventoryitems HTTP/1.1
 User-Agent: MyClient/1.0.0
-Accept: application/json
+Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 ```

@@ -155,7 +155,7 @@ It is very important that you call the [`/treatments`](#send-medical-records-pro
 ```http
 POST /treatments HTTP/1.1
 User-Agent: MyClient/1.0.0
-Accept: application/json
+Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 ```

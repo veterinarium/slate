@@ -58,7 +58,7 @@ Parameter | Type | Description
 ```http
 POST /medic HTTP/1.1
 User-Agent: MyClient/1.0.0
-Accept: application/json
+Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 ```
@@ -86,7 +86,7 @@ Creates or updates single medic object sent in the request. SFS will attempt to 
 ```http
 POST /medics HTTP/1.1
 User-Agent: MyClient/1.0.0
-Accept: application/json
+Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 ```

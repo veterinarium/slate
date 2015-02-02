@@ -31,13 +31,13 @@ Not all errors map cleanly onto HTTP response codes, however. Please refer to th
 ```http
 GET /inventoryitem HTTP/1.1
 User-Agent: MyClient/1.0.0
-Accept: application/json
+Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 ```
 ```http
 HTTP/1.1 404 Not Found
-Content-Type: application/json
+Accept: application/json
 
 {
    "Message" : "Inventory item not found"

@@ -81,7 +81,7 @@ Parameter | Type | Description
 ```http
 POST /hospitalization HTTP/1.1
 User-Agent: MyClient/1.0.0
-Accept: application/json
+Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 ```
@@ -180,7 +180,7 @@ Every `hospitalization` object transferred with these events will contain the pa
 ```http
 POST /hospitalization/emr-hospitalization-id/medicalrecordsreport HTTP/1.1
 User-Agent: MyClient/1.0.0
-Accept: application/json
+Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 timezoneName: Europe/Helsinki
@@ -205,7 +205,7 @@ Specify the `hospitalizationId` of the hospitalization object in the EMR. The sa
 ```http
 POST /hospitalization/emr-hospitalization-id/inventoryreport HTTP/1.1
 User-Agent: MyClient/1.0.0
-Accept: application/json
+Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 timezoneName: America/Chicago
