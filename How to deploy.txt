@@ -2,7 +2,7 @@ This repository ( https://github.com/veterinarium/slate.git ) only contains the 
 
 To edit documentation just edit *.md files in sources folder. 
 
-To see the changes run 'bundle exec middleman server' in Terminal. 
+To see the changes run 'bundle exec middleman server' in Terminal. (and then open http://0.0.0.0:4567 in browser)
 
 To push the changes to the github just use: git push.
 
@@ -17,3 +17,4 @@ To publish these changes to http://veterinarium.github.io/ do next:
 		-> changes should immediatelly appear on http://veterinarium.github.io/
 
 
+	

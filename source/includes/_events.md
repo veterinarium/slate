@@ -2,9 +2,10 @@
 
 Smart Flow Sheet will send events to EMR on different occasions:
 
-1. [Inventory import finished](#recieving-the-status-of-import-operation)
+1. [Inventory import finished](#receiving-the-status-of-import-operation)
 2. [When single medical record has been entered or removed](#retreive-single-medical-record)
 3. [When mutliple medical records have been entered or removed](#retreive-multiple-medical-records)
+4. [When patient has been discharged from the whiteboard](#discharge-hospitalization-event)
 
 In the future there can be other events added to this, e.g. sending flowsheet report or medical records report on patient discharge, etc…
 

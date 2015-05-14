@@ -123,10 +123,10 @@ Asynchronously creates or updates the inventory items sent with the request. Bef
 * Returns HTTP status 200 in case the input data has been accepted for import
 * In case of error returns the [`Error`](#the-error-object) object
 
-After an import operation finishes SFS will send the `inventoryitems.imported` [event](#recieving-the-status-of-import-operation) to the registered webhook. We will pass back the same `inventoryitems` object to EMR, and fill in the status of the import operation for every inventory item provided.
+After an import operation finishes SFS will send the `inventoryitems.imported` [event](#receiving-the-status-of-import-operation) to the registered webhook. We will pass back the same `inventoryitems` object to EMR, and fill in the status of the import operation for every inventory item provided.
 
 <aside class="warning">
-This is the asynchronous method. Please expect to recieve and handle the `inventoryitems.imported` event that SFS will send to you after the import is complete.
+This is the asynchronous method. Please expect to receive and handle the `inventoryitems.imported` event that SFS will send to you after the import is complete.
 </aside>
 
 <aside class="notice">
@@ -160,7 +160,7 @@ This method deletes an inventory item by id.
 * Synchronous
 * If item cannot be found in SFS, the [`Error`](#the-error-object) object will be returned with HTTP 404 status code
 
-## Recieving the status of import operation
+## Receiving the status of import operation
 
 > Example of `inventoryitems.imported` event JSON:
 

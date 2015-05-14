@@ -15,7 +15,7 @@ Parameter | Type | Description
 **hospitalizations** | Array | The array of [`hospitalization`](#the-hospitalization-object) objects. 
 
 
-This object will be sent with the `hospitalizations.discharged` event in case when multiple patients were [discharged](#recieving-hospitalization-report) from the Smart Flow Sheet whiteboard.
+This object will be sent with the `hospitalizations.discharged` event in case when multiple patients were [discharged](#discharge-hospitalization-event) from the Smart Flow Sheet whiteboard.
 
 ## The hospitalization object
 
@@ -33,12 +33,14 @@ Parameter | Type | Description
 **weightUnits** | String | *Optional*. Units for the weight. Can be `kg` or `lbs`. If not specified then clinic’s default weight units will be used
 **weight** | Double | **Required**. Weight of the patient. Smart Flow Sheet requires weight to be specified for every patient from the moment hospitalization is created
 **estimatedDaysOfStay** | Integer | *Optional*. This value will be used to create requested number of days of hospitalization. If this value is not specified then by default 2 days will be created
-**emrFileNumber** | String | *Optional*. The value of emr file number, that will be shown on a flowsheet
+**fileNumber** | String | *Optional*. The value of emr file number, that will be shown on a flowsheet
 **caution** | Boolean | *Optional*. Whether to show `caution stripe` on a flowsheet or not
 **dnr** | Boolean | *Optional*. Whether to show `dnr stripe` on a flowsheet or not
 **doctorName** | String | *Optional*. The name of the doctor on duty
 **medicId** | String | *Optional*. Alternatively to specifying the `doctorName` field, you can provide the id of the [`medic`](#the-medic-object) object that corresponds to the doctor on duty, and has been registered with the [`appropriate API`](#create-or-update-single-medic) call
 **diseases** | Array | *Optional*. Array of strings. A collection of diseases
+**cageNumber** | String | *Optional*. The cage number. This value will be shown on the whiteboard near patient name.
+**color** | String | *Optional*. The RGB hex color code (eg. #439FE0). This value is used to color patient`s info panel on the whiteboard and flowsheets.
 **reportPath** | String | *Optional*. The path to the flowsheet report file that has been generated during patient discharge
 **patient** | Patient | *Required when creating new hospitalization. Optional if used to update existing hospitalization*. The [`patient`](#the-patient-object) object
 
@@ -49,7 +51,7 @@ Parameter | Type | Description
 Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | *Optional*. Describes the type of the object transferred with the SFS events. Should be assigned `patient` value
-**patientId** | String | **Required**. EMR internal ID of the patient
+**patientId** | String | **Optional**. EMR internal ID of the patient
 **name** | String | **Required**. The name of the patient
 **birthday** | Date | *Optional*. Patient`s birthday. Time format: YYYY-MM-DDThh:mm:ss.sssTZD (e.g. 1997-07-16T19:20:30.000+00:00)
 **sex** | String | **Required**. Patient's sex type. There is a set of standard predefined strings that specify the sex type of a patient: `M`, `N`, `MN`, `FS`
@@ -68,7 +70,7 @@ Parameter | Type | Description
 Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | *Optional*. Describes the type of the object transferred with the SFS events. Should be assigned `client` value
-**ownerId** | String | **Required**. EMR internal ID of the client
+**ownerId** | String | **Optional**. EMR internal ID of the client
 **nameLast** | String | **Optional**. Pet owner's last name
 **nameFirst** | String | *Optional*. Pet owner's first name
 **homePhone** | String | *Optional*. Pet owner's home phone
@@ -97,6 +99,7 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 	"fileNumber": "# 123",
 	"dnr": true,
 	"caution": false,
+	"color": "#439FE0",
 	"doctorName": "Dr. Ivan",
 	"medicId": "dr-ivan-emr-id",
 	"diseases": [
@@ -140,7 +143,7 @@ This method deletes hospitalization by id. Specify the `hospitalizationId` of th
 * Synchronous
 * If hospitalization cannot be found in SFS, the [`Error`](#the-error-object) object will be returned with HTTP 404 status code
 
-## Receiving hospitalization report
+## Discharge hospitalization event
 
 > Example of `hospitalizations.discharged` event JSON:
 
@@ -171,7 +174,36 @@ As soon as one or several patients have been discharged from the Smart Flow Shee
 
 2. The `hospitalizations.discharged` event in case if multiple patients were discharged. In this case the [hospitalizations](#the-hospitalizations-object) object will be transferred with the event.
 
-Every `hospitalization` object transferred with these events will contain the path to the flowsheet report pdf file in the `reportPath` field.
+Every `hospitalization` object transferred with these events will contain the path to the flowsheet report pdf file in the `reportPath` field. If for some reason the value of this field is empty then you may explicitly [download the flowsheet report](#download-the-flowsheet-report).
+
+<aside class="notice">
+There is no API that allow to discharge a patient. Any patient can be discharged only using Smart Flow Sheet user interface.
+</aside>
+
+## Download the Flowsheet report
+
+> Example Request:
+
+```http
+POST /hospitalization/emr-hospitalization-id/flowsheetreport HTTP/1.1
+User-Agent: MyClient/1.0.0
+Content-Type: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
+```
+
+This method allows to download the flowsheet report from Smart Flow Sheet.
+
+All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: Europe/Helsinki`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
+
+Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
+
+* Url: /hospitalization/{hospitalizationId}/flowsheetreport
+* Method: GET
+* Synchronous
+* Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value
+* In case of error returns the [`Error`](#the-error-object) object
 
 ## Download the Medical Records report
 

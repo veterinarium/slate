@@ -15,7 +15,7 @@
 
 404 Not Found - The requested item doesn`t exist.
 
-409 Conflict - If the request with the same “id“ (e.g. “inventoryitems.id“) has been already recieved and is currenly under processing. Normally means that second request is not needed.
+409 Conflict - If the request with the same “id“ (e.g. “inventoryitems.id“) has been already received and is currenly under processing. Normally means that second request is not needed.
 
 429 Too Many Requests - May happen when trying to upload a lot of inventory items. Need to slown down. 
 

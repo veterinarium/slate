@@ -117,10 +117,10 @@ Asynchronously creates or updates the medics objects sent with the request. Befo
 * Returns HTTP status 200 in case the input data has been accepted for import
 * In case of error returns the [`Error`](#the-error-object) object
 
-After an import operation finishes SFS will send the `medics.imported` [event](#recieving-the-status-of-the-import-operation) to the registered webhook. We will pass back the same `medics` object to EMR, and fill in the status of the import operation for every object provided.
+After an import operation finishes SFS will send the `medics.imported` [event](#receiving-the-status-of-the-import-operation) to the registered webhook. We will pass back the same `medics` object to EMR, and fill in the status of the import operation for every object provided.
 
 <aside class="warning">
-This is the asynchronous method. Please expect to recieve and handle the `medics.imported` event that SFS will send to you after the import is complete.
+This is the asynchronous method. Please expect to receive and handle the `medics.imported` event that SFS will send to you after the import is complete.
 </aside>
 
 <aside class="notice">
@@ -154,7 +154,7 @@ This method deletes a medic by id.
 * Synchronous
 * If item cannot be found in SFS, the [`Error`](#the-error-object) object will be returned with HTTP 404 status code
 
-## Recieving the status of the import operation
+## Receiving the status of the import operation
 
 > Example of `medics.imported` event JSON:
 

@@ -24,7 +24,7 @@ To make the SFS API as explorable as possible, we provide test-mode API keys as 
 To retrieve the events from SFS you should register two [webhooks](http://en.wikipedia.org/wiki/Webhook): one for sandbox environment, and another for production. 
 SFS then sends an HTTP POST request with the event object to the URLs you provided.
 
-To recieve your API keys, please prepare the urls that will be used for the webhooks, and send us a request at [info@smartflowsheet.com](mailto:info@smartflowsheet.com).
+To receive your API keys, please prepare the urls that will be used for the webhooks, and send us a request at [info@smartflowsheet.com](mailto:info@smartflowsheet.com).
 
 Your API keys carry many privileges, so be sure to keep them secret!
 

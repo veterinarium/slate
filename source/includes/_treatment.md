@@ -25,7 +25,7 @@ Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | Describes the type of the object transferred with the SFS events (e.g. `treatment.record_entered`). Should be assigned `treatment` value
 **inventoryId** | String | Inventory item external id (which was provided with inventory upload). If “Null” then there is no inventory item for this treatment found in SFS
-**name** | String | Name of the treatment parameter (for the inventory items it will be equal to the inventory item name imported from EMR) 
+**name** | String | Name of the treatment parameter as it is shown on the flowsheet 
 **hospitalizationId** | String | Hospitalization external id (which was provided with hospitalization creation)
 **treatmentGuid** | String | **Required**. A unique internal identifier of the treatment item (which corresponds to the treatment at particular hour on a flowsheet) 
 **time** | Date | Treatment time (UTC time that corresponds to an hour on a flowsheet). Time format: YYYY-MM-DDThh:mm:ss.sssTZD (e.g. 1997-07-16T19:20:30.000+00:00)
