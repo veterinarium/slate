@@ -25,7 +25,7 @@ Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | *Optional*. Describes the type of the object transferred with the SFS events. Should be assigned `hospitalization` value
 **hospitalizationId** | String | **Required**. EMR internal ID of the hospitalization
-**departmentlId** | Integer | *Optional*. Id of the department patient should be created at. If not specified hospitalization will be created in SFS default department
+**departmentId** | Integer | *Optional*. Id of the department patient should be created at. If not specified hospitalization will be created in SFS default department
 **hospitalizationGuid** | String | *Optional*. A unique internal identifier of the hospitalization. This field will be transferred with the SFS events.
 **dateCreated** | Date | **Required**. Specifies the date and time of the patient arrival in the hospital. Time format: YYYY-MM-DDThh:mm:ss.sssTZD (e.g. 1997-07-16T19:20:30.000+00:00)
 **treatmentTemplateName** | String | *Optional* The name of the treatment template to be used for created hospitalization. If not specified then the "Default" template will be used.
