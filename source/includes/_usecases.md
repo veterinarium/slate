@@ -24,7 +24,9 @@ To import inventory you may use next API methods:
 
 The later API method works asynchronously and sends `inventoryitems.imported` event to the url specified with the webhook. 
 
-After import is finished, user should visit the `Settings` page on our web-site and assign SFS-specific category (monitoring, activity, fluid, medication or procedure) to every inventory item received. Then doctors can add these items to the flowsheets.
+After the import is finished, the user can start using the inventory immediately by adding imported items to the patients` flowsheets. For the inventory items being added for the first time, Smart Flow Sheet will display a popup window. In this window, the user can adjust the display name of the item, and which SFS section (monitoring, activity, fluid, medication, or procedure) it should be attached to.
+
+<img src="images/mappopup.png"> 
 
 ## Creating Patients
 

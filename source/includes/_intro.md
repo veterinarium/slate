@@ -36,25 +36,25 @@ You may also register a custom webhook per each clinic account (see [Register cu
 
 ## Clinic Setup
 
-> Sandbox Home and Account pages:
+> Sandbox Home and Settings pages:
 
 ```shell
 https://sfs-public.azurewebsites.net
-https://sfs-public.azurewebsites.net/Account/Info
+https://sfs-public.azurewebsites.net/Settings?page=emr
 ```
 
-> Production Home and Account pages:
+> Production Home and Settings pages:
 
 ```shell
 https://www.smartflowsheet.com
-https://www.smartflowsheet.com/Account/Info
+https://www.smartflowsheet.com/Settings?page=emr
 ```
 
 Our API is intended for use with a registered clinic account. You can register a clinic account on the `Home` page both in sandbox and production environments.
 
 After a new clinic account has been registered in SFS, there is a clinic API Key automatically generated. This key should be used to authenticate against our API (see [Authentication](#authentication) for more information). It is also used with the Events sent to EMR to identify the account. 
 
-The clinic API key can be obtained by user from `Account Info` page on our web-site after registration. We assume that SFS user will be able to register this key in EMR's user interface.
+The clinic API key can be obtained by user from `Settings` page on our web-site after registration. We assume that SFS user will be able to register this key in EMR's user interface.
 
 <aside class="notice">
 After registering the account with Smart Flow Sheet it will be assigned a 14-day trial period. To keep the test clinic account 'alive' in a sandbox environment after the trial period expiration, you can simply subscribe to a `Referral Practice` plan by visiting [Billing](https://sfs-public.azurewebsites.net/Billing/Payment/4) web page and providing this card number: `4242 4242 4242 4242`.  
