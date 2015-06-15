@@ -133,10 +133,17 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 * Returns HTTP status 201 in case the new hospitalization has been created
 * In case of error returns the [`Error`](#the-error-object) object
 
+<aside class="warning">
+The Smart Slow Sheet API does not allow to create several hospitalizations with the same `hospitalizationId`. However, it may happen that the user needs to re-submit the hospitalization that has been previously created (and then deleted or discharged from Smart Flow Sheet user interface). In this case, the second call of this API will return the error with the message `Hospitalization already exists`.  If this happens, we advise to show the user the error message and prompt them if they would like to re-submit the patient. If user selects the option to re-submit the patient, then EMR should:
+
+1. Make a call to [`delete hospitalization`](#delete-hospitalization) API first;
+2. Call [create a patient](#create-a-patient) API again to re-submit the patient information.
+</aside>
 
 ## Delete hospitalization
 
 This method deletes hospitalization by id. Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created. 
+This method also "unmaps" the `hospitalizationId` from the internal hospitalization record - this allows to submit the patient to Smart Flow Sheet again afterward.
 
 * Url: /hospitalization/{hospitalizationId}
 * Method: DELETE
