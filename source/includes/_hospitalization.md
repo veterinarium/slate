@@ -54,7 +54,7 @@ Parameter | Type | Description
 **patientId** | String | **Optional**. EMR internal ID of the patient
 **name** | String | **Required**. The name of the patient
 **birthday** | Date | *Optional*. Patient`s birthday. Time format: YYYY-MM-DDThh:mm:ss.sssTZD (e.g. 1997-07-16T19:20:30.000+00:00)
-**sex** | String | **Required**. Patient's sex type. There is a set of standard predefined strings that specify the sex type of a patient: `M`, `N`, `MN`, `FS`
+**sex** | String | **Required**. Patient's sex type. There is a set of standard predefined strings that specify the sex type of a patient: `M`, `F`, `MN`, `FS`
 **species** | String | *Optional*. Patient's species
 **color** | String | *Optional*. Patient's color
 **breed** | String | *Optional*. Patient's breed
