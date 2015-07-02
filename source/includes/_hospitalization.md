@@ -42,6 +42,7 @@ Parameter | Type | Description
 **cageNumber** | String | *Optional*. The cage number. This value will be shown on the whiteboard near patient name.
 **color** | String | *Optional*. The RGB hex color code (eg. #439FE0). This value is used to color patient`s info panel on the whiteboard and flowsheets.
 **reportPath** | String | *Optional*. The path to the flowsheet report file that has been generated during patient discharge
+**status** | String | *Optional*. The status of the hospitalization. This field will be transferred with the SFS events. Can be `active`, `deleted` or `discharged`.
 **patient** | Patient | *Required when creating new hospitalization. Optional if used to update existing hospitalization*. The [`patient`](#the-patient-object) object
 
 ## The patient object
@@ -140,7 +141,57 @@ The Smart Slow Sheet API does not allow to create several hospitalizations with 
 2. Call [create a patient](#create-a-patient) API again to re-submit the patient information.
 </aside>
 
+## Get active hospitalizations
+
+> Example Request:
+
+```http
+GET /hospitalizations HTTP/1.1
+User-Agent: MyClient/1.0.0
+Content-Type: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+```
+
+This method allows to get all hospitalizations that have `active` value of the `status` field.  
+
+* Url: /hospitalizations
+* Method: GET
+* Synchronous
+* Returns HTTP status 200 and a collection of [`hospitalization`](#the-hospitalization-object) objects
+* In case of error returns the [`Error`](#the-error-object) object
+
+## Get hospitalization
+
+> Example Request:
+
+```http
+GET /hospitalization/emr-hospitalization-id HTTP/1.1
+User-Agent: MyClient/1.0.0
+Content-Type: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+```
+
+This method allows to get information about hospitalization by id. Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created. 
+
+* Url: /hospitalization/{hospitalizationId}
+* Method: GET
+* Synchronous
+* Returns HTTP status 200 and the [`hospitalization`](#the-hospitalization-object) object
+* If hospitalization cannot be found in SFS, the [`Error`](#the-error-object) object will be returned with HTTP 404 status code
+
 ## Delete hospitalization
+
+> Example Request:
+
+```http
+DELETE /hospitalization/emr-hospitalization-id HTTP/1.1
+User-Agent: MyClient/1.0.0
+Content-Type: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+```
 
 This method deletes hospitalization by id. Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created. 
 This method also "unmaps" the `hospitalizationId` from the internal hospitalization record - this allows to submit the patient to Smart Flow Sheet again afterward.
@@ -262,3 +313,28 @@ Specify the `hospitalizationId` of the hospitalization object in the EMR. The sa
 * Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value
 * In case of error returns the [`Error`](#the-error-object) object
 
+
+## Download the Tech Notes report
+
+> Example Request:
+
+```http
+POST /hospitalization/emr-hospitalization-id/technotesreport HTTP/1.1
+User-Agent: MyClient/1.0.0
+Content-Type: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
+```
+
+This method allows to download the tech notes report from Smart Flow Sheet. Use this method when receiving `hospitalizations.discharged` event, as at this point the report should contain all the tech notes of the specified hospitalization. 
+
+All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: Europe/Helsinki`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
+
+Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
+
+* Url: /hospitalization/{hospitalizationId}/technotesreport
+* Method: GET
+* Synchronous
+* Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value
+* In case of error returns the [`Error`](#the-error-object) object
