@@ -32,9 +32,13 @@ After the import is finished, the user can start using the inventory immediately
 
 Creating patients from EMR into SFS has two obvious benefits:
 
-1. Saving clinic's staff time. (Almost always the information required to create a patient in Smart Flow Sheet has been already entered into EMR user interface upon patient addmission to the hospital. Using `/hospitalization` API method it is possible to transfer that information into SFS and we will automatically create a new patient record for the user.)
+1. _Saving the clinic's staff time._ Almost always the information required to create a patient in Smart Flow Sheet has been already entered into EMR user interface upon patient addmission to the hospital. Using `/hospitalization` API method it is possible to transfer that information into SFS and we will automatically create a new patient record for the user.
 
-2. Automatically collecting charges for the patient. Smart Flow Sheet will not send medical records for the patients created from SFS user interface. To receive medical records for the patient you will need to create a patient in SFS explicitly using `/hospitalization` API method. 
+2. _Automatically collecting charges for the patient._ Smart Flow Sheet will not send medical records for the patients created from SFS user interface. To receive medical records for the patient you will need to create a patient in SFS explicitly using `/hospitalization` API method. 
+
+Usually, what we recommend is that you place 'Smart Flow Sheet' button on your user interface. Clinic staff could then press it when they are ready to create a patient's flowsheet (usually when a doctor decides to leave a patient in the hospital). Before creating a patient in Smart Flow Sheet, you may want to allow a user to select a [treatment template](#retreive-active-treatment-templates) and [department](#retreive-existing-departments) for the patient. After the required treatment template and department has been selected, you should use [this](#create-a-patient) API to create patient record in Smart Flow Sheet.
+
+After the patient has been submitted to Smart Flow Sheet, you may want to query the patient's hospitalization status using [this](#get-hospitalization) API. With its help, you can get some additional information, e.g. patient image file to update your user interface. Or you may track the `status` of the patient, and as soon as the patient has been discharged, you could download and attach to your medical records the set of files related to the patient, e.g. the [flowsheet report](#download-the-flowsheet-report).
 
 ## Receiving Medical Records
 

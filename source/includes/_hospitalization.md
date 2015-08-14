@@ -61,6 +61,7 @@ Parameter | Type | Description
 **breed** | String | *Optional*. Patient's breed
 **criticalNotes** | String | *Optional*. The value of the critical notes that will be shown on a flowsheet.
 **customField** | String | *Optional*. The value of the custom field that will be shown on a flowsheet.
+**imagePath** | String | *Optional*. The path to the patient`s image file.
 **owner** | Client | *Required when creating new hospitalization. Optional if used to update existing hospitalization*. The [`client`](#the-client-object) object
 
 ## The client object

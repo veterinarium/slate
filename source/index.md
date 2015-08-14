@@ -13,10 +13,12 @@ includes:
   - usecases
   - auth
   - errors
+  - department
   - hospitalization
   - inventory
   - medic
   - treatment
+  - treatmenttemplate
   - events
 
 search: true
