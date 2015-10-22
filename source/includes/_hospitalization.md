@@ -88,6 +88,7 @@ User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
 ```
 ```json
 {
