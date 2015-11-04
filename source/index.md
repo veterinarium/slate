@@ -19,6 +19,7 @@ includes:
   - medic
   - treatment
   - treatmenttemplate
+  - anesthetic
   - events
 
 search: true
