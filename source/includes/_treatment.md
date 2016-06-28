@@ -38,9 +38,9 @@ Parameter | Type | Description
 **mediaContentType** | String | The content type of media file (e.g. `image/jpg`, `video/mp4`, etc...)
 **doctorName** | String | The name of the doctor on duty. This value will be provided only in case if the name of the doctor is specified on a correspondent flowsheet
 **doctor** | Medic | The [`medic`](#the-medic-object) object that corresponds to the doctor on duty. This value will be provided only in case if associated medic has been imported from EMR
+**type** | Integer | The type of the treatment, should be one of following types: `0` - Flowsheet treatment, `1` - Anesthetic treatment, `2` - Treatment task.
 **asyncOperationStatus** | Integer | **Required if sent to `/treatments` API method**. This field should be filled in by EMR when sending the `treatments` object with the `/treatments` API method. This is usually happens in response to the `treatments.records_entered` async event. This field describes the status of the asynchronous operation for each treatment.  Should be: 1. `less than 0` - error occured; 2. `greater or equal 0` - operation succeed.
 **asyncOperationMessage** | String | *Optional*. May contain the error message in case the `asyncOperationStatus` field represents the error (less than 0).
-**type** | Integer | The type of the treatment, should be one of following types: `0` - Flowsheet treatment, `1` - Anesthetic treatment, `2` - Treatment task.
 
 ## Retreive single medical record
 

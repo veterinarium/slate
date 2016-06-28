@@ -6,7 +6,7 @@ The are two objects used by Smart Flow Sheet to notify EMR when notes entered in
 
 * `notes`
 
-Both objects is sent with the asynchronous `notes.entered` event when one or several tech notes has been entered/removed.
+Both objects are sent with the asynchronous `notes.entered` event when one or several tech notes has been entered/removed.
 
 ## The notes object
 
@@ -26,7 +26,7 @@ Parameter | Type | Description
 Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | Describes the type of the object transferred with the SFS events (e.g. `notes.entered`). Should be assigned `note` value
-**noteGuid** | String | Required. A unique internal identifier of the note item
+**noteGuid** | String | **Required**. A unique internal identifier of the note item
 **hospitalizationId** | String | Hospitalization external id (which was provided with hospitalization creation)
 **time** | Date | Note creation time (UTC time that corresponds to an hour on a flowsheet). Time format: YYYY-MM-DDThh:mm:ss.sssTZD (e.g. 1997-07-16T19:20:30.000+00:00)
 **text** | String | The string value that was entered during note creation
