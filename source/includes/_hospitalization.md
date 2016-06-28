@@ -33,9 +33,8 @@ Parameter | Type | Description
 **weightUnits** | String | *Optional*. Units for the weight. Can be `kg` or `lbs`. If not specified then clinic’s default weight units will be used
 **weight** | Double | **Required**. Weight of the patient. Smart Flow Sheet requires weight to be specified for every patient from the moment hospitalization is created
 **estimatedDaysOfStay** | Integer | *Optional*. This value will be used to create requested number of days of hospitalization. If this value is not specified then by default 2 days will be created
-**fileNumber** | String | *Optional*. The value of emr file number, that will be shown on a flowsheet
+**fileNumber** | String | *Optional*. The value of emr file number, that will be shown on a flowsheet. If not specified SFS will populate it with `hospitalizationId`
 **caution** | Boolean | *Optional*. Whether to show `caution stripe` on a flowsheet or not
-**dnr** | Boolean | *Optional*. Whether to show `dnr stripe` on a flowsheet or not
 **doctorName** | String | *Optional*. The name of the doctor on duty
 **medicId** | String | *Optional*. Alternatively to specifying the `doctorName` field, you can provide the id of the [`medic`](#the-medic-object) object that corresponds to the doctor on duty, and has been registered with the [`appropriate API`](#create-or-update-single-medic) call
 **diseases** | Array | *Optional*. Array of strings. A collection of diseases
@@ -100,7 +99,6 @@ timezoneName: Europe/Helsinki
 	"weight": 5.8,
 	"estimatedDaysOfStay": 1,
 	"fileNumber": "# 123",
-	"dnr": true,
 	"caution": false,
 	"color": "#439FE0",
 	"doctorName": "Dr. Ivan",
@@ -245,7 +243,7 @@ There is no API that allow to discharge a patient. Any patient can be discharged
 > Example Request:
 
 ```http
-POST /hospitalization/emr-hospitalization-id/flowsheetreport HTTP/1.1
+GET /hospitalization/emr-hospitalization-id/flowsheetreport HTTP/1.1
 User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
@@ -270,7 +268,7 @@ Specify the `hospitalizationId` of the hospitalization object in the EMR. The sa
 > Example Request:
 
 ```http
-POST /hospitalization/emr-hospitalization-id/medicalrecordsreport HTTP/1.1
+GET /hospitalization/emr-hospitalization-id/medicalrecordsreport HTTP/1.1
 User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
@@ -290,12 +288,12 @@ Specify the `hospitalizationId` of the hospitalization object in the EMR. The sa
 * Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value
 * In case of error returns the [`Error`](#the-error-object) object
 
-## Download the Inventory report
+## Download the Billing report
 
 > Example Request:
 
 ```http
-POST /hospitalization/emr-hospitalization-id/inventoryreport HTTP/1.1
+GET /hospitalization/emr-hospitalization-id/billingreport HTTP/1.1
 User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
@@ -303,25 +301,25 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 timezoneName: America/Chicago
 ```
 
-This method allows to download the inventory report from Smart Flow Sheet. Use this method when receiving `hospitalizations.discharged` event, as at this point the report should contain the complete inventory usage information of the specified hospitalization. 
+This method allows to download the billing report from Smart Flow Sheet. Use this method when receiving `hospitalizations.discharged` event, as at this point the report should contain the complete inventory usage information of the specified hospitalization. 
 
 All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: America/Chicago`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
 
 Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
 
-* Url: /hospitalization/{hospitalizationId}/inventoryreport
+* Url: /hospitalization/{hospitalizationId}/billingreport
 * Method: GET
 * Synchronous
 * Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value
 * In case of error returns the [`Error`](#the-error-object) object
 
 
-## Download the Tech Notes report
+## Download the Notes report
 
 > Example Request:
 
 ```http
-POST /hospitalization/emr-hospitalization-id/technotesreport HTTP/1.1
+GET /hospitalization/emr-hospitalization-id/notesreport HTTP/1.1
 User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
@@ -329,13 +327,13 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 timezoneName: Europe/Helsinki
 ```
 
-This method allows to download the tech notes report from Smart Flow Sheet. Use this method when receiving `hospitalizations.discharged` event, as at this point the report should contain all the tech notes of the specified hospitalization. 
+This method allows to download the notes report from Smart Flow Sheet. Use this method when receiving `hospitalizations.discharged` event, as at this point the report should contain all the tech notes of the specified hospitalization. 
 
 All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: Europe/Helsinki`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
 
 Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
 
-* Url: /hospitalization/{hospitalizationId}/technotesreport
+* Url: /hospitalization/{hospitalizationId}/notesreport
 * Method: GET
 * Synchronous
 * Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value

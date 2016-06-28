@@ -23,12 +23,13 @@ Parameter | Type | Description
 **dateStarted** | Date | *Optional*. Anesthesia start time. Time format: YYYY-MM-DDThh:mm:ss.sssTZD (e.g. 1997-07-16T19:20:30.000+00:00)
 **dateEnded** | Date | *Optional*. Anesthesia end time. Time format: YYYY-MM-DDThh:mm:ss.sssTZD (e.g. 1997-07-16T19:20:30.000+00:00)
 **reportPath** | String | *Optional*. The path to the anesthetic sheet report file that has been generated during finalization of the anesthetic sheet.
+**recordsReportPath** | String | *Optional*. The path to the anesthetic records report file that has been generated during finalization of the anesthetic sheet.
 **surgeon** | Medic | *Optional*. The [`medic`](#the-medic-object) object that corresponds to the doctor assigned to the anesthetic sheet.
 **anesthetist** | Medic | *Optional*. The [`medic`](#the-medic-object) object that corresponds to the anesthetist assigned to the anesthetic sheet.
 **assistant** | Medic | *Optional*. The [`medic`](#the-medic-object) object that corresponds to the assistant assigned to the anesthetic sheet.
 
 
-## Retreive anesthetic sheet reports
+## Retreive anesthetic sheet and anesthetic records reports
 
 > Example Request:
 
@@ -48,7 +49,8 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 	        "objectType": "anesthetic",
 	        "dateStarted": "2015-11-04T17:23:07.707+00:00",
 	        "dateEnded": "2015-11-04T19:17:03.463+00:00",
-	        "reportPath": "https://pdf-report-webfile-path",
+	        "reportPath": "https://pdf-anesthetic-sheet-report-webfile-path",
+            "recordsReportPath": "https://pdf-anesthetic-records-report-webfile-path",
 	        "surgeon": {
 	            "objectType": "medic",
 	            "medicId": "emrIdm4",
@@ -73,6 +75,7 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 	        "dateStarted": "2015-11-04T17:23:07.707+00:00",
 	        "dateEnded": null,
 	        "reportPath": null,
+            "recordsReportPath": null,
 	        "surgeon": {
 	            "objectType": "medic",
 	            "medicId": "emrIdm4",
@@ -91,7 +94,7 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 }
 ```
 
-This method allows to download all anesthetic sheet reports related to some hospitalization from Smart Flow Sheet.
+This method allows to download all anesthetic sheet reports and anesthetic records reports related to some hospitalization from Smart Flow Sheet.
 
 Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
 

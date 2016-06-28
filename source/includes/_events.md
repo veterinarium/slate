@@ -6,6 +6,7 @@ Smart Flow Sheet will send events to EMR on different occasions:
 2. [When single medical record has been entered or removed](#retreive-single-medical-record)
 3. [When mutliple medical records have been entered or removed](#retreive-multiple-medical-records)
 4. [When patient has been discharged from the whiteboard](#discharge-hospitalization-event)
+5. [When mutliple notes have been entered or removed](#retreive-multiple-notes)
 
 In the future there can be other events added to this, e.g. sending flowsheet report or medical records report on patient discharge, etc…
 
@@ -55,6 +56,7 @@ Event | Description
 **medics.imported** | Sent after importing of emr medics finished
 **treatment.record_entered** | Sent from SFS when one medical record has been entered/removed
 **treatments.records_entered** | Sent from SFS when multiple medical records have been entered/removed
+**notes.entered** | Sent from SFS when multiple notes have been entered/removed
 
 
 ## Register custom webhook

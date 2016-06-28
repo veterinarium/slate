@@ -20,6 +20,7 @@ includes:
   - treatment
   - treatmenttemplate
   - anesthetic
+  - note
   - events
 
 search: true
