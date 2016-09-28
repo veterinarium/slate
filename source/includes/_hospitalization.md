@@ -43,6 +43,7 @@ Parameter | Type | Description
 **reportPath** | String | *Optional*. The path to the flowsheet report file that has been generated during patient discharge
 **status** | String | *Optional*. The status of the hospitalization. This field will be transferred with the SFS events. Can be `active`, `deleted` or `discharged`.
 **patient** | Patient | *Required when creating new hospitalization. Optional if used to update existing hospitalization*. The [`patient`](#the-patient-object) object
+**resuscitate** | String | *Optional* Can be `dnr`, `bls` or `als`. Default value is `bls`.
 
 ## The patient object
 
