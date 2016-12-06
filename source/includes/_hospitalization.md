@@ -95,8 +95,6 @@ timezoneName: Europe/Helsinki
 	"objectType": "hospitalization",
 	"hospitalizationId": "emr-hospitalization-id",
 	"dateCreated": "2014-11-03T17:54:55.221+00:00",
-	"temperatureUnits": "C",
-	"weightUnits": "kg",
 	"weight": 5.8,
 	"estimatedDaysOfStay": 1,
 	"fileNumber": "# 123",
