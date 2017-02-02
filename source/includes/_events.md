@@ -9,6 +9,7 @@ Smart Flow Sheet will send events to EMR on different occasions:
 5. [When patient has been discharged from the whiteboard](#discharge-hospitalization-event)
 6. [When mutliple notes have been entered or removed](#retreive-multiple-notes)
 7. [When anesthetic sheet has been finalized](#finalize-anesthetic-event)
+8. [When the form has been filled in for a patient](#retreive-forms)
 
 In the future there can be other events added to this, e.g. sending flowsheet report or medical records report on patient discharge, etc…
 
@@ -52,15 +53,16 @@ Smart Flow Sheet will send several events on different occasions. Below is short
 
 Event | Description
 ---------- | -------
+**anesthetics.finalized** | Sent from SFS when clinic stuff finalizes anesthetic sheet(s)
+**forms.created** | Sent from SFS when the form(s) is created and filled in for the patient (e.g. client self check-in form)
 **hospitalizations.created** | Sent after a patient(s) has been created in Smart Flow Sheet
 **hospitalization.discharged** | Sent after a patient has been discharged from the Smart Flow Sheet whiteboard
 **hospitalizations.discharged** | Sent after multiple patients have been discharged from the Smart Flow Sheet whiteboard
 **inventoryitems.imported** | Sent after importing of emr inventory items finished
+**notes.entered** | Sent from SFS when multiple notes have been entered/removed
 **medics.imported** | Sent after importing of emr medics finished
 **treatment.record_entered** | Sent from SFS when one medical record has been entered/removed
 **treatments.records_entered** | Sent from SFS when multiple medical records have been entered/removed
-**notes.entered** | Sent from SFS when multiple notes have been entered/removed
-**anesthetics.finalized** | Sent from SFS when clinic stuff finalizes anesthetic sheet(s)
 
 
 ## Register custom webhook

@@ -49,6 +49,24 @@ There are two options for discharging the patient in Smart Flow Sheet:
 Generation of the patient reports may take several minutes for the hospitalizations with a significant number of days of treatment (flowsheets). Subscribing to the `hospitalization.discharged` event is the best way to be notified about operation completion. 
 </aside>
 
+## Client Self Check-in Form
+
+Smart Flow Sheet provides the "Client Self Check-in Admission form" feature in "Smart Flow" iPad app. This means clients have the ability, from the iPad, to fill out their own information, take a photo of their pet, enter a reason for their visit and update as well as entering the name of their regular clinic while waiting in the waiting room. Upon completion of the form, the patient is created in Smart Flow Sheet and appears on the whiteboard. 
+
+As soon as the patient is created from the Client Self Check-in form, Smart Flow Sheet will notify the EMR by sending `hospitalizations.created` and `forms.created` events. You might want to consume and handle these events to:
+
+* automatically register both client and patient in the EMR
+
+* attach to Smart Flow Sheet hospitalization to receive treatment events as well as patient`s medical records and pdf reports. 
+
+There are three steps that should be realized to get client`s data entered on admission form:
+
+1. The EMR should [consume](#get-notified-about-new-hospitalizations) the `hospitalizations.created` event that is sent from Smart Flow Sheet as soon as a patient is added from the client self check-in form. The `hospitalization` object will be provided with the event. When the event is received both client and patient records might be created in the EMR.
+
+2. In a second step, you should [attach](#attach-to-existing-hospitalization) your internal records to SFS hospitalization. This is required to receive all other types of events related to this patient as well as to be able to use any [hospitalization API](#hospitalizations).
+
+3. Finally, Smart Flow Sheet will send the `forms.created` [event](#retreive-forms) that you might consume to get the rest of the data entered by the client during the check-in process.
+
 ## Inventory Import
 
 The most common reason to integrate with the SFS services is to be able to receive medical records from SFS upon treatment execution. This information can be used to automatically collect charges for the inventory items stored in EMR database. 

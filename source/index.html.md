@@ -13,14 +13,15 @@ includes:
   - usecases
   - auth
   - errors
+  - anesthetic
   - department
+  - form
   - hospitalization
   - inventory
   - medic
+  - note
   - treatment
   - treatmenttemplate
-  - anesthetic
-  - note
   - events
 
 search: true
