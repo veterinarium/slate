@@ -7,6 +7,7 @@ Smart Flow Sheet will send events to EMR on different occasions:
 3. [When mutliple medical records have been entered or removed](#retreive-multiple-medical-records)
 4. [When patient has been discharged from the whiteboard](#discharge-hospitalization-event)
 5. [When mutliple notes have been entered or removed](#retreive-multiple-notes)
+6. [When anesthetic sheet has been finalized](#finalize-anesthetic-event)
 
 In the future there can be other events added to this, e.g. sending flowsheet report or medical records report on patient discharge, etc…
 
@@ -41,7 +42,7 @@ Parameter | Type | Description
 ---------- | ------- | -------
 **clinicApiKey** | String | Clinic api key to associate clinic on EMR`s side
 **eventType** | String | The [`type`](#types-of-events) of the event
-**object** | Object | Object of one of the following type: `treatment`, `treatments`, `inventoryitems`, `hospitalization`. This list can expand as soon as new objects will be sent with the API.
+**object** | Object | Object of one of the following type: `treatment`, `treatments`, `inventoryitems`, `hospitalization`, etc... This list can expand as soon as new objects will be sent with the API.
 
 
 ## Types of events
@@ -57,6 +58,7 @@ Event | Description
 **treatment.record_entered** | Sent from SFS when one medical record has been entered/removed
 **treatments.records_entered** | Sent from SFS when multiple medical records have been entered/removed
 **notes.entered** | Sent from SFS when multiple notes have been entered/removed
+**anesthetics.finalized** | Sent from SFS when clinic stuff finalizes anesthetic sheet(s)
 
 
 ## Register custom webhook

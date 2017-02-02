@@ -120,3 +120,12 @@ Here is an example:
 4. When `Cefazolin 100 mg/ml` is given to the patient, Smart Flow Sheet sends medical record information with the `treatment.record_entered` event to the EMR webhook, and transfer the volume of the medication dispensed. In this case it will be `2.25 ml`. 
 
 You can find the example JSONs in `Details` section in the right part of this page. As you can notice the object transferred with the `treatment.record_entered` event contains the `inventoryId` field that is equal to the `id` field of the inventory item imported into SFS with the `/inventoryitem` API method. In this way EMR is able to associate entered medical record with the correct inventory item, and create a charge.
+
+## Billing for a Surgery
+
+When the patient is admitted for surgery, Smart Flow Sheet provides access to the electronic anesthetic sheet feature. The anesthetic sheet allows to map patient's vitals and calculate pre-op and emergency drugs. After the surgery is over the clinic staff finalizes the anesthetic sheet to:
+
+* generate anesthetic sheet protocols
+* calculate an invoice for the surgery
+
+To make it easier for your EMR to calculate billing for the surgery, Smart Flow Sheet sends the `anesthetics.finalized` [event](#finalize-anesthetic-event) with included [anesthetic](#the-anesthetic-object) object as soon as user presses 'Finalize Anesthetiс Sheet' button on iPad. 

@@ -20,6 +20,8 @@ Parameter | Type | Description
 Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | Describes the type of the object transferred with the SFS API. Equals to `anesthetic`
+**hospitalizationId** | String | EMR internal ID of the hospitalization
+**surgeryGuid** | String | A unique internal identifier of the surgery. This field will be transferred with the SFS events.
 **dateStarted** | Date | *Optional*. Anesthesia start time. Time format: YYYY-MM-DDThh:mm:ss.sssTZD (e.g. 1997-07-16T19:20:30.000+00:00)
 **dateEnded** | Date | *Optional*. Anesthesia end time. Time format: YYYY-MM-DDThh:mm:ss.sssTZD (e.g. 1997-07-16T19:20:30.000+00:00)
 **reportPath** | String | *Optional*. The path to the anesthetic sheet report file that has been generated during finalization of the anesthetic sheet.
@@ -28,6 +30,51 @@ Parameter | Type | Description
 **anesthetist** | Medic | *Optional*. The [`medic`](#the-medic-object) object that corresponds to the anesthetist assigned to the anesthetic sheet.
 **assistant** | Medic | *Optional*. The [`medic`](#the-medic-object) object that corresponds to the assistant assigned to the anesthetic sheet.
 
+## Finalize anesthetic event
+
+> Example of `anesthetics.finalized` event JSON:
+
+```json
+{
+    "clinicApiKey": "clinic-api-key",
+    "eventType": "anesthetics.finalized",
+    "object": {
+	    "objectType": "anesthetics",
+		"id": "sfs-operation-id",
+		"anesthetics": [
+			{
+		        "objectType": "anesthetic",
+		        "hospitalizationId": "emr-hospitalization-id",
+		        "surgeryGuid": "sfs-surgery-guid",
+		        "dateStarted": "2015-11-04T17:23:07.707+00:00",
+		        "dateEnded": "2015-11-04T19:17:03.463+00:00",
+		        "reportPath": "https://pdf-anesthetic-sheet-report-webfile-path",
+	            "recordsReportPath": "https://pdf-anesthetic-records-report-webfile-path",
+		        "surgeon": {
+		            "objectType": "medic",
+		            "medicId": "emrIdm4",
+		            "name": "Dr. George",
+		            "medicType": "doctor"
+		        },
+		        "anesthetist": {
+		            "objectType": "medic",
+		            "medicId": "emrIdm3",
+		            "name": "Ivan",
+		            "medicType": "doctor"
+		        },
+		        "assistant": {
+		            "objectType": "medic",
+		            "medicId": "emrIdm4",
+		            "name": "Dr. George",
+		            "medicType": "doctor"
+		        }
+			}
+		]
+	}
+}
+```
+
+As soon as one or several anesthetic sheets have been finalized in Smart Flow app on iPad, SFS will notify EMR by sending `anesthetics.finalized` event. The [anesthetics](#the-anesthetics-object) object will be transferred with the event.
 
 ## Retreive anesthetic sheet and anesthetic records reports
 
@@ -47,6 +94,8 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 	"anesthetics": [
 		{
 	        "objectType": "anesthetic",
+	        "hospitalizationId": "emr-hospitalization-id",
+	        "surgeryGuid": "sfs-surgery-guid",
 	        "dateStarted": "2015-11-04T17:23:07.707+00:00",
 	        "dateEnded": "2015-11-04T19:17:03.463+00:00",
 	        "reportPath": "https://pdf-anesthetic-sheet-report-webfile-path",
@@ -72,6 +121,8 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 		},
 		{
 	        "objectType": "anesthetic",
+	        "hospitalizationId": "emr-hospitalization-id",
+	        "surgeryGuid": "sfs-surgery-guid",	        
 	        "dateStarted": "2015-11-04T17:23:07.707+00:00",
 	        "dateEnded": null,
 	        "reportPath": null,
