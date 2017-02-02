@@ -152,6 +152,7 @@ User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
 ```
 
 This method allows to get all hospitalizations that have `active` value of the `status` field.  
@@ -172,6 +173,7 @@ User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
 ```
 
 This method allows to get information about hospitalization by id. Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created. 
@@ -192,6 +194,7 @@ User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
 ```
 
 This method deletes hospitalization by id. Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created. 
@@ -201,6 +204,31 @@ This method also "unmaps" the `hospitalizationId` from the internal hospitalizat
 * Method: DELETE
 * Synchronous
 * If hospitalization cannot be found in SFS, the [`Error`](#the-error-object) object will be returned with HTTP 404 status code
+
+## Discharge hospitalization
+
+> Example Request:
+
+```http
+POST /hospitalization/discharge/emr-hospitalization-id HTTP/1.1
+User-Agent: MyClient/1.0.0
+Content-Type: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
+```
+
+This method initiates the patient discharge operation. Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created. This API requires the valid `timezoneName` header specified in the request.
+
+* Url: /hospitalization/discharge/{hospitalizationId}
+* Method: POST
+* Body: empty
+* Asynchronous. In the case of success, the response will include the [hospitalization](#the-hospitalization-object) object with the `status` field equal to `discharged`. At this point, all patient reports are not generated yet - Smart Flow Sheet just initiated documents generation process. After the files are generated, and operation is complete, Smart Flow Sheet will send the `hospitalization.discharged` event to EMR.
+* In case of error returns the [`Error`](#the-error-object) object
+
+<aside class="notice">
+To discharge a patient, it should have the patient name and file number fields specified in Smart Flow Sheet user interface. In case, if any of these fields are empty, of if there is a non-finalized anesthetic sheet, then the API will return 400 HTTP code with an appropriate error message that could be shown to the user.
+</aside>
 
 ## Discharge hospitalization event
 
@@ -234,10 +262,6 @@ As soon as one or several patients have been discharged from the Smart Flow Shee
 2. The `hospitalizations.discharged` event in case if multiple patients were discharged. In this case the [hospitalizations](#the-hospitalizations-object) object will be transferred with the event.
 
 Every `hospitalization` object transferred with these events will contain the path to the flowsheet report pdf file in the `reportPath` field. If for some reason the value of this field is empty then you may explicitly [download the flowsheet report](#download-the-flowsheet-report).
-
-<aside class="notice">
-There is no API that allow to discharge a patient. Any patient can be discharged only using Smart Flow Sheet user interface.
-</aside>
 
 ## Download the Flowsheet report
 
