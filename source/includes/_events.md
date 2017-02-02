@@ -5,13 +5,14 @@ Smart Flow Sheet will send events to EMR on different occasions:
 1. [Inventory import finished](#receiving-the-status-of-import-operation)
 2. [When single medical record has been entered or removed](#retreive-single-medical-record)
 3. [When mutliple medical records have been entered or removed](#retreive-multiple-medical-records)
-4. [When patient has been discharged from the whiteboard](#discharge-hospitalization-event)
-5. [When mutliple notes have been entered or removed](#retreive-multiple-notes)
-6. [When anesthetic sheet has been finalized](#finalize-anesthetic-event)
+4. [When patient has been created in Smart Flow Sheet](#get-notified-about-new-hospitalizations)
+5. [When patient has been discharged from the whiteboard](#discharge-hospitalization-event)
+6. [When mutliple notes have been entered or removed](#retreive-multiple-notes)
+7. [When anesthetic sheet has been finalized](#finalize-anesthetic-event)
 
 In the future there can be other events added to this, e.g. sending flowsheet report or medical records report on patient discharge, etc…
 
-Events will be sent only for those hospitalizations that have been created from EMR. Events on hospitalizations created directly from SFS won`t be sent to EMR webhook. 
+Events will be sent only for those hospitalizations that have been created from EMR. The only exception is the `hospitalizations.created` event that is sent even for the patients created manually with Smart Flow Sheet user interface. Events on hospitalizations created directly from SFS won`t be sent to EMR webhook. 
 
 Sending events require webhook to be registered in SFS. You may register a webhook that will receive all the events associated with your EMR, or you may [register a custom webhook](#register-custom-webhook) for each clinic account. Requirements to webhook:
 
@@ -51,6 +52,7 @@ Smart Flow Sheet will send several events on different occasions. Below is short
 
 Event | Description
 ---------- | -------
+**hospitalizations.created** | Sent after a patient(s) has been created in Smart Flow Sheet
 **hospitalization.discharged** | Sent after a patient has been discharged from the Smart Flow Sheet whiteboard
 **hospitalizations.discharged** | Sent after multiple patients have been discharged from the Smart Flow Sheet whiteboard
 **inventoryitems.imported** | Sent after importing of emr inventory items finished

@@ -184,6 +184,29 @@ This method allows to get information about hospitalization by id. Specify the `
 * Returns HTTP status 200 and the [`hospitalization`](#the-hospitalization-object) object
 * If hospitalization cannot be found in SFS, the [`Error`](#the-error-object) object will be returned with HTTP 404 status code
 
+
+## Attach to existing hospitalization
+
+> Example Request:
+
+```http
+POST /hospitalization/sfs-hospitalization-guid/attach/emr-hospitalization-id HTTP/1.1
+User-Agent: MyClient/1.0.0
+Content-Type: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
+```
+
+When a patient is created manually by the user with Smart Flow Sheet user interface, the [hospitalization](#the-hospitalization-object) will be sent to EMR with `hospitalizations.created` event. The `hospitalizationId` field of the object will be empty, however, `hospitalizationGuid` field (a unique internal identifier of the hospitalization) will be provided.  You may want to attach your EMR internal ID to this hospitalization to be able to receive any other type of events, as well as download patient reports and use any other API that requires `hospitalizationId`. The HTTP request below provides such possibility. It takes `hospitalizationGuid` value as one part of Url, while your internal `hospializationId` is included in another part of Url.
+
+* Url: /hospitalization/{hospitalizationGuid}/attach/{hospitalizationId}
+* Method: POST
+* Body: empty
+* Synchronous
+* Returns HTTP status 200 in case the `hospitalizationId` has been successfully attached to the hospitalization located by `hospitalizationGuid`
+* In case of error returns the [`Error`](#the-error-object) object
+
 ## Delete hospitalization
 
 > Example Request:
@@ -262,6 +285,60 @@ As soon as one or several patients have been discharged from the Smart Flow Shee
 2. The `hospitalizations.discharged` event in case if multiple patients were discharged. In this case the [hospitalizations](#the-hospitalizations-object) object will be transferred with the event.
 
 Every `hospitalization` object transferred with these events will contain the path to the flowsheet report pdf file in the `reportPath` field. If for some reason the value of this field is empty then you may explicitly [download the flowsheet report](#download-the-flowsheet-report).
+
+## Get notified about new hospitalizations
+
+> Example of `hospitalizations.created` event JSON:
+
+```json
+{
+    "clinicApiKey": "clinic-api-key",
+    "eventType": "hospitalizations.created",
+    "object": {
+	    "objectType": "hospitalizations",
+		"id": "sfs-operation-id",
+		"hospitalizations": [
+			{
+				"objectType": "hospitalization",
+				"hospitalizationGuid": "sfs-hospitalization-guid",
+				"dateCreated": "2014-11-05T10:20:19.000+00:00",
+				"weight": 5.8,
+				"estimatedDaysOfStay": 1,
+				"fileNumber": "# 123",
+				"caution": false,
+				"color": "#439FE0",
+				"doctorName": "Dr. Ivan",
+				"medicId": "dr-ivan-emr-id",
+				"diseases": [
+					"high temperature",
+					"vomiting"
+				],
+				"patient": {
+					"objectType": "patient",
+					"name": "Jordi Alba",
+					"species": "Canin",
+					"owner": {
+						"objectType": "client",
+						"nameLast": "Dow",
+						"nameFirst": "Jack",
+						"workPhone": "555-55-55"
+					},
+					"color": "Brown",
+					"sex": "M",
+					"criticalNotes": "Cefazolin allergy",
+					"customField": "some notes"
+				}
+			}
+		]
+	}
+}
+```
+
+When hospitalization is created in Smart Flow Sheet (both through the user interface and [create patient](#create-a-patient) API) the `hospitalizations.created` event will be sent to EMR. The [hospitalization](#the-hospitalization-object) object will be included in the payload. 
+
+The `hospitalizationId` field would be empty in case if the patient were created manually from Smart Flow Sheet user interface. You may want to attach your EMR internal ID to this hospitalization to be able to receive any other type of events, as well as download patient reports and use any other API that requires `hospitalizationId`.
+
+You may find more details about attaching hospitalizations API [here](#attach-to-existing-hospitalization).
 
 ## Download the Flowsheet report
 
