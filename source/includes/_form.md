@@ -30,7 +30,7 @@ Parameter | Type | Description
 **objectType** | String | Describes the type of the object transferred with the SFS events (e.g. `forms.created`). Should be assigned `form` value
 **formGuid** | String | **Required**. A unique internal identifier of the form item
 **hospitalizationId** | String | Hospitalization external id (which was provided with hospitalization creation)
-**name** | String | **Required**. A unique identifier of the form type. Can be one of the following: 1. `client.selfcheckin`, 2. `custom`
+**name** | String | **Required**. A unique identifier of the form type. Can be one of the following: 1. `admission`, 2. `custom`
 **title** | String | The title of the form (e.g. "Client Self Check-in")
 **fields** | Array | The array of `formfield` objects. See description of the `formfield` object [below](#the-formfield-object)
 
@@ -72,6 +72,6 @@ The `forms.created` event is sent from SFS when one or several forms were create
 * Url: webhook provided by EMR
 * Method: POST
 * Asynchronous 
-* Transferres [forms](#the-forms-object) object included in the `event` object
+* Transfers [forms](#the-forms-object) object included in the `event` object
 * Expected response with 200 Http code in case of success.
 * In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object

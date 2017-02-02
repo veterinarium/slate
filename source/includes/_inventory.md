@@ -198,6 +198,6 @@ SFS will send the `inventoryitems.imported` event to the url provided by EMR at 
 * Url: webhook provided by EMR
 * Method: POST
 * Synchronous
-* Transferres [`inventoryitems`](#the-inventoryitems-object) object included in the `event` object
+* Transfers [`inventoryitems`](#the-inventoryitems-object) object included in the `event` object
 * Expected response with 200 Http code in case of success.
 * In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object

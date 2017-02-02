@@ -81,7 +81,7 @@ The `treatment.record_entered` event is sent from SFS when one medical record ha
 * Url: webhook provided by EMR
 * Method: POST
 * Synchronous (can be changed to asynchronous at some point)
-* Transferres [`treatment`](#the-treatment-object) object included in the `event` object
+* Transfers [`treatment`](#the-treatment-object) object included in the `event` object
 * Expected response with 200 Http code in case of success.
 * In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object
 
@@ -142,7 +142,7 @@ The `treatments.records_entered` event is sent from SFS when one or several medi
 * Url: webhook provided by EMR
 * Method: POST
 * Asynchronous 
-* Transferres [`treatments`](#the-treatments-object) object included in the `event` object
+* Transfers [`treatments`](#the-treatments-object) object included in the `event` object
 * Expected response with 200 Http code in case of success.
 * In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object
 

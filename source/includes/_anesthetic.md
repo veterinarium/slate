@@ -76,6 +76,13 @@ Parameter | Type | Description
 
 As soon as one or several anesthetic sheets have been finalized in Smart Flow app on iPad, SFS will notify EMR by sending `anesthetics.finalized` event. The [anesthetics](#the-anesthetics-object) object will be transferred with the event.
 
+* Url: webhook provided by EMR
+* Method: POST
+* Asynchronous 
+* Transfers [`anesthetics`](#the-anesthetics-object) object included in the `event` object
+* Expected response with 200 Http code in case of success.
+* In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object
+
 ## Retreive anesthetic sheet and anesthetic records reports
 
 > Example Request:
