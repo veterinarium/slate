@@ -31,7 +31,7 @@ At the end of hospitalization, the clinic staff will usually discharge the patie
 * [Billing report](#download-the-billing-report)
 * [Notes report](#download-the-notes-report)
 * If the anesthetic sheet was created, completed, and finalized, for the patient, then the associated [Anesthetic Sheet and Anesthetic Records reports](#retreive-anesthetic-sheet-and-anesthetic-records-reports) can be downloaded
-* If client filled out the [Client self check-in form]() then it can be downloaded
+* If client filled out the [Client self check-in form](#download-the-client-self-check-in-form) then it can be downloaded
 
 There are two options for discharging the patient in Smart Flow Sheet:
 

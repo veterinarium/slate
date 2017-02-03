@@ -75,3 +75,28 @@ The `forms.created` event is sent from SFS when one or several forms were create
 * Transfers [forms](#the-forms-object) object included in the `event` object
 * Expected response with 200 Http code in case of success.
 * In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object
+
+## Download the Client Self Check-in form
+
+> Example Request:
+
+```http
+GET /hospitalization/emr-hospitalization-id/checkinformreport HTTP/1.1
+User-Agent: MyClient/1.0.0
+Content-Type: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
+```
+
+This method allows to download the Client Self Check-in form from Smart Flow Sheet. 
+
+All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: Europe/Helsinki`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
+
+Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created.
+
+* Url: /hospitalization/{hospitalizationId}/checkinformreport
+* Method: GET
+* Synchronous
+* Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value
+* In case of error returns the [`Error`](#the-error-object) object
