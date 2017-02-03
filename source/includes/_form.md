@@ -28,9 +28,9 @@ Parameter | Type | Description
 Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | Describes the type of the object transferred with the SFS events (e.g. `forms.created`). Should be assigned `form` value
-**formGuid** | String | **Required**. A unique internal identifier of the form item
+**formGuid** | String | **Required**. A unique internal identifier of the form
 **hospitalizationId** | String | Hospitalization external id (which was provided with hospitalization creation)
-**name** | String | **Required**. A unique identifier of the form type. Can be one of the following: 1. `admission`, 2. `custom`
+**name** | String | A unique identifier of the form type. (E.g. `checkinform` is the default value of the `name` attribute for "Client Self Check-in form") 
 **title** | String | The title of the form (e.g. "Client Self Check-in")
 **fields** | Array | The array of `formfield` objects. See description of the `formfield` object [below](#the-formfield-object)
 
@@ -41,7 +41,7 @@ Parameter | Type | Description
 Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | Describes the type of the object transferred with the SFS events (e.g. `forms.created`). Should be assigned `formfield` value
-**name** | String | **Required**. A unique identifier of the form field
+**name** | String | A unique identifier of the form field
 **title** | String | Field label (the one that users sees while filling in the form field)
 **contentType** | String | This field describes the type of content of the `value` field (e.g. `text/plain`, `image/jpg`)
 **value** | String | The string value of the form field
