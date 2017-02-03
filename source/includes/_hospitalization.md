@@ -136,7 +136,7 @@ timezoneName: Europe/Helsinki
 * In case of error returns the [`Error`](#the-error-object) object
 
 <aside class="warning">
-The Smart Slow Sheet API does not allow to create several hospitalizations with the same `hospitalizationId`. However, it may happen that the user needs to re-submit the hospitalization that has been previously created (and then deleted or discharged from Smart Flow Sheet user interface). In this case, the second call of this API will return the error with the message `Hospitalization already exists`.  If this happens, we advise to show the user the error message and prompt them if they would like to re-submit the patient. If user selects the option to re-submit the patient, then EMR should:
+The Smart Slow Sheet API does not allow to create several hospitalizations with Use the same `hospitalizationId`. However, it may happen that the user needs to re-submit the hospitalization that has been previously created (and then deleted or discharged from Smart Flow Sheet user interface). In this case, the second call of this API will return the error with the message `Hospitalization already exists`.  If this happens, we advise to show the user the error message and prompt them if they would like to re-submit the patient. If user selects the option to re-submit the patient, then EMR should:
 
 1. Make a call to [`delete hospitalization`](#delete-hospitalization) API first;
 2. Call [create a patient](#create-a-patient) API again to re-submit the patient information.
@@ -176,7 +176,7 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 timezoneName: Europe/Helsinki
 ```
 
-This method allows to get information about hospitalization by id. Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created. 
+This method allows to get information about hospitalization by id. Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created. 
 
 * Url: /hospitalization/{hospitalizationId}
 * Method: GET
@@ -220,7 +220,7 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 timezoneName: Europe/Helsinki
 ```
 
-This method deletes hospitalization by id. Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created. 
+This method deletes hospitalization by id. Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created. 
 This method also "unmaps" the `hospitalizationId` from the internal hospitalization record - this allows to submit the patient to Smart Flow Sheet again afterward.
 
 * Url: /hospitalization/{hospitalizationId}
@@ -241,12 +241,12 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 timezoneName: Europe/Helsinki
 ```
 
-This method initiates the patient discharge operation. Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created. This API requires the valid `timezoneName` header specified in the request.
+This method initiates the patient discharge operation. Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created. This API requires the valid `timezoneName` header specified in the request.
 
 * Url: /hospitalization/discharge/{hospitalizationId}
 * Method: POST
 * Body: empty
-* Asynchronous. In the case of success, the response will include the [hospitalization](#the-hospitalization-object) object with the `status` field equal to `discharged`. At this point, all patient reports are not generated yet - Smart Flow Sheet just initiated documents generation process. After the files are generated, and operation is complete, Smart Flow Sheet will send the `hospitalization.discharged` event to EMR.
+* Asynchronous. In the case of success, the response will include the [hospitalization](#the-hospitalization-object) object with the `status` field equal to `discharged`. At this point, all patient reports are not generated yet - Smart Flow Sheet only initiated the document generation process. After the files are generated, and operation is complete, Smart Flow Sheet will send the `hospitalization.discharged` event to the EMR.
 * In case of error returns the [`Error`](#the-error-object) object
 
 <aside class="notice">
@@ -357,7 +357,7 @@ This method allows to download the flowsheet report from Smart Flow Sheet.
 
 All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: Europe/Helsinki`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
 
-Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
+Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created.
 
 * Url: /hospitalization/{hospitalizationId}/flowsheetreport
 * Method: GET
@@ -382,7 +382,7 @@ This method allows to download the medical record report from Smart Flow Sheet. 
 
 All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: Europe/Helsinki`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
 
-Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
+Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created.
 
 * Url: /hospitalization/{hospitalizationId}/medicalrecordsreport
 * Method: GET
@@ -407,7 +407,7 @@ This method allows to download the billing report from Smart Flow Sheet. Use thi
 
 All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: America/Chicago`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
 
-Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
+Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created.
 
 * Url: /hospitalization/{hospitalizationId}/billingreport
 * Method: GET
@@ -433,7 +433,7 @@ This method allows to download the notes report from Smart Flow Sheet. Use this 
 
 All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: Europe/Helsinki`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
 
-Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
+Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created.
 
 * Url: /hospitalization/{hospitalizationId}/notesreport
 * Method: GET

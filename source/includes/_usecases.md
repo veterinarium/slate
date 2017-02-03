@@ -24,26 +24,23 @@ After the patient has been submitted to Smart Flow Sheet, you may want to query 
 
 ## Discharging Patients
 
-At the end of hospitalization, the clinic staff will usually discharge the patient. During this step, Smart Flow Sheet generates a set of documents (in pdf format) that your practice management software might want to attach to the patient record. Below is the list of such reports with references of how to download them through API:
+At the end of hospitalization, the clinic staff will usually discharge the patient. During this step, Smart Flow Sheet generates a set of documents (in pdf format) that your practice management software might want to attach to the patient record. Below is the list of such reports with references of how to download them using the API:
 
 * [Flowsheet report](#download-the-flowsheet-report)
 * [Medical records report](#download-the-medical-records-report)
 * [Billing report](#download-the-billing-report)
 * [Notes report](#download-the-notes-report)
-
-In case, if the anesthetic sheet was performed for the patient the associated anesthetic documents can be downloaded too:
-
-* [Anesthetic sheet report](#the-anesthetic-object)
-* [Anesthetic records report](#retreive-anesthetic-sheet-and-anesthetic-records-reports)
+* If the anesthetic sheet was created, completed, and finalized, for the patient, then the associated [Anesthetic Sheet and Anesthetic Records reports](#retreive-anesthetic-sheet-and-anesthetic-records-reports) can be downloaded
+* If client filled out the [Client self check-in form]() then it can be downloaded
 
 There are two options for discharging the patient in Smart Flow Sheet:
 
-1. _The user initiates discharge of the patient from SFS user interface._ In this case, Smart Flow Sheet will prepare all pdf reports and send the `hospitalization.discharged` event that your EMR may consume, download appropriate pdf files from Smart Flow Sheet and attach them to the patient records;
+1. _The user initiates discharge of the patient from Smart Flow Sheet user interface._ In this case, Smart Flow Sheet will prepare all pdf reports and send the `hospitalization.discharged` event that your EMR may consume, download the appropriate pdf files from Smart Flow Sheet and attach them to the patient records.
 
-2. _The user initiates discharge operation from the EMR side._ In this case, EMR should call [discharge](#discharge-hospitalization) API to initiate discharging of the patient in Smart Flow Sheet. After the successful call to this API, the response will include the [hospitalization](#the-hospitalization-object) object with the `status` field equal to `discharged`, but the `reportPath` field will be empty. At this point, all patient reports are not generated yet - Smart Flow Sheet just initiated documents generation process. To download the files, you have a couple of implementation strategies: 
+2. _The user initiates discharge operation from the EMR side._ In this case, the EMR should call [discharge](#discharge-hospitalization) API to initiate discharging of the patient in Smart Flow Sheet. After the successful call to this API, the response will include the [hospitalization](#the-hospitalization-object) object with the `status` field equal to `discharged`, but the `reportPath` field will be empty. At this point, all patient reports are not generated yet - Smart Flow Sheet only initiated the document generation process. To download the files, you have a couple of implementation strategies: 
  * wait for the `hospitalization.discharged` event and then start downloading the documents
- * wait at least 15 seconds and then call [get hospitalization]()  API. If the `reportPath` is not empty, then you may start downloading reports
- * add some sort of "Download patient documents" button that will call [get hospitalization](#get-hospitalization)  API, and if the `reportPath` is not empty, then the download may start. Otherwise, propose to repeat the operation later because the documents are not ready yet
+ * wait at least 15 seconds and then call the [get hospitalization]()  API. If the `reportPath` is not empty, then you may start downloading the reports
+ * add some sort of "Download patient documents" button that will call the [get hospitalization](#get-hospitalization)  API, and if the `reportPath` is not empty, then the download may start. Otherwise, propose to repeat the operation later because the documents are not ready yet
 
 <aside class="warning">
 Generation of the patient reports may take several minutes for the hospitalizations with a significant number of days of treatment (flowsheets). Subscribing to the `hospitalization.discharged` event is the best way to be notified about operation completion. 
@@ -51,19 +48,19 @@ Generation of the patient reports may take several minutes for the hospitalizati
 
 ## Client Self Check-in Form
 
-Smart Flow Sheet provides the "Client Self Check-in Admission form" feature in "Smart Flow" iPad app. This means clients have the ability, from the iPad, to fill out their own information, take a photo of their pet, enter a reason for their visit and update as well as entering the name of their regular clinic while waiting in the waiting room. Upon completion of the form, the patient is created in Smart Flow Sheet and appears on the whiteboard. 
+We offer the “Client Self Check-in Admission form” feature available in the “Smart Flow” iPad app. This means clients have the ability from the iPad to fill out their own information, take a photo of their pet, enter a reason for their visit and update and/or enter the name of their regular clinic from the waiting room. Upon completion of the form, the patient is created in Smart Flow and appears on the whiteboard.
 
 As soon as the patient is created from the Client Self Check-in form, Smart Flow Sheet will notify the EMR by sending `hospitalizations.created` and `forms.created` events. You might want to consume and handle these events to:
 
-* automatically register both client and patient in the EMR
+* Automatically register both the client and patient into the EMR.
 
-* attach to Smart Flow Sheet hospitalization to receive treatment events as well as patient`s medical records and pdf reports. 
+* Attach to Smart Flow Sheet hospitalization to receive treatment events as well as the patient`s medical records and pdf reports. 
 
-There are three steps that should be realized to get client`s data entered on admission form:
+There are three steps that should be realized to get client’s data entered on the admission form:
 
-1. The EMR should [consume](#get-notified-about-new-hospitalizations) the `hospitalizations.created` event that is sent from Smart Flow Sheet as soon as a patient is added from the client self check-in form. The `hospitalization` object will be provided with the event. When the event is received both client and patient records might be created in the EMR.
+1. The EMR should [consume](#get-notified-about-new-hospitalizations) the `hospitalizations.created` event that is sent from Smart Flow Sheet as soon as a patient is added from the Client Self Check-in Admission form. The `hospitalization` object will be provided with the event. When the event is received both the client and patient records might be created in the EMR.
 
-2. In a second step, you should [attach](#attach-to-existing-hospitalization) your internal records to SFS hospitalization. This is required to receive all other types of events related to this patient as well as to be able to use any [hospitalization API](#hospitalizations).
+2. In a second step, you should [attach](#attach-to-existing-hospitalization) your internal records to SFS hospitalization. This is required to receive all other types of events related to this patient, as well as to be able to use any [hospitalization API](#hospitalizations).
 
 3. Finally, Smart Flow Sheet will send the `forms.created` [event](#retreive-forms) that you might consume to get the rest of the data entered by the client during the check-in process.
 
@@ -141,9 +138,9 @@ You can find the example JSONs in `Details` section in the right part of this pa
 
 ## Billing for a Surgery
 
-When the patient is admitted for surgery, Smart Flow Sheet provides access to the electronic anesthetic sheet feature. The anesthetic sheet allows to map patient's vitals and calculate pre-op and emergency drugs. After the surgery is over the clinic staff finalizes the anesthetic sheet to:
+When the patient is admitted for surgery, Smart Flow Sheet provides access to the electronic anesthetic sheet feature.  The anesthetic sheet allows medical staff to map the patient’s vitals and calculate pre-op and emergency drugs. After the surgery is over, the clinic staff finalizes the anesthetic sheet to:
 
-* generate anesthetic sheet protocols
-* calculate an invoice for the surgery
+* Generate anesthetic sheet protocols.
+* Calculate an invoice for the surgery.
 
-To make it easier for your EMR to calculate billing for the surgery, Smart Flow Sheet sends the `anesthetics.finalized` [event](#finalize-anesthetic-event) with included [anesthetic](#the-anesthetic-object) object as soon as user presses 'Finalize Anesthetiс Sheet' button on iPad. 
+To make it easier for your EMR to calculate billing for the surgery, Smart Flow Sheet sends the `anesthetics.finalized` [event](#finalize-anesthetic-event) with the included [anesthetic](#the-anesthetic-object) object as soon as the user presses the 'Finalize Anesthetiс Sheet' button on the iPad. 

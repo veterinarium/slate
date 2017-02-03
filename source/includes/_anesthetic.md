@@ -154,7 +154,7 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 
 This method allows to download all anesthetic sheet reports and anesthetic records reports related to some hospitalization from Smart Flow Sheet.
 
-Specify the `hospitalizationId` of the hospitalization object in the EMR. The same `hospitalizationId` that was supplied when hospitalization had been created.
+Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created.
 
 * Url: /hospitalization/{hospitalizationId}/anesthetics
 * Method: GET
