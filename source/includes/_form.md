@@ -52,19 +52,177 @@ Parameter | Type | Description
 
 ```json
 {
-    "clinicApiKey": "clinic-api-key",
-    "eventType": "forms.created",
-    "object": {
-	    "objectType": "forms",
-		"id": "sfs-operation-id",
-		"forms":[
-	        {
-	            "objectType": "form",
-	            "formGuid": "sfs-form-guid1",
-	            "hospitalizationId": "external-hosp-id1",
-	        }	
-		]
-	}
+  "clinicApiKey": "clinic-api-key",
+  "eventType": "forms.created",
+  "object": {
+    "objectType": "forms",
+    "id": "sfs-operation-id"
+    "forms": [
+      {
+        "objectType": "form",
+	    "formGuid": "sfs-form-guid",
+    	"hospitalizationId": "external-hospitalization-id",
+        "name": "checkinform",
+        "title": "Client Self Check-in",
+        "fields": [
+          {
+            "objectType": "formfield",
+            "name": "avatar",
+            "title": "Avatar",
+            "value": "https://attached-image-webfile-path",
+            "contentType": "image/jpg"
+          },
+          {
+            "objectType": "formfield",
+            "name": "email",
+            "title": "Your email",
+            "value": "me@example.com",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "first_name",
+            "title": "Your name",
+            "value": "John",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "last_name",
+            "title": "Last name",
+            "value": "Doe",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "address",
+            "title": "Address",
+            "value": "105, 11th Ave",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "city",
+            "title": "City",
+            "value": "New York",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "state",
+            "title": "State",
+            "value": "NY",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "zip",
+            "title": "Zip",
+            "value": "10001",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "phone_home",
+            "title": "Home phone",
+            "value": "(111) 111-1111",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "phone_work",
+            "title": "Work phone",
+            "value": "(222) 222-2222",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "phone_cell",
+            "title": "Owner's cell phone",
+            "value": "(333) 333-3333",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "phone_co_owner",
+            "title": "Co-Owner's cell phone",
+            "value": "(444) 444-4444",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "phone_number_to_reach",
+            "title": "Best number to reach you today",
+            "value": "Home phone",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "pet_name",
+            "title": "Your Pet's Name",
+            "value": "Fluffy",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "weight",
+            "title": "Weight (kg)",
+            "value": "3.5",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "birth_date",
+            "title": "Birth date",
+            "value": "2016-07-16T19:20:30.000+00:00",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "breed",
+            "title": "Breed",
+            "value": "English Cocker Spaniel",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "sex",
+            "title": "Sex",
+            "value": "Male",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "family_veterinarian",
+            "title": "Family veterinarian",
+            "value": "Dr. Ivan Zak",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "clinic",
+            "title": "Clinic",
+            "value": "Best Pet Vet",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "visit_reason",
+            "title": "What is the reason for your visit today?",
+            "value": "Vaccination",
+            "contentType": "text/plain"
+          },
+          {
+            "objectType": "formfield",
+            "name": "signature",
+            "title": "Consent Form",
+            "value": "https://attached-image-webfile-path",
+            "contentType": "image/jpg"
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 The `forms.created` event is sent from SFS when one or several forms were created. SFS will send [forms](#the-forms-object) object with all information entered into the forms.
