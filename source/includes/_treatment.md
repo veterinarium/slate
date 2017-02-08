@@ -156,9 +156,7 @@ The `treatments.records_entered` event is sent from SFS when one or several medi
 * Expected response with 200 Http code in case of success.
 * In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object
 
-<aside class="warning">
 It is very important that you call the [`/treatments`](#send-medical-records-processing-results) API method, after you finish processing  the medical records that SFS sends to EMR with this event. Make sure to preserve and send back the `id` field received with the `treatments` object.
-</aside>
 
 ## Send medical records processing results
 

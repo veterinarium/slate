@@ -10,7 +10,7 @@ By using the Smart Flow Sheet (hereinafter `SFS`) API the third-party software (
 > API Sandbox Endpoint:
 
 ```shell
-https://sfs-public.azurewebsites.net/api/v3
+http://sandbox.smartflowsheet.net/api/v3
 ```
 
 > API Production Endpoint:
@@ -30,17 +30,15 @@ Your API keys carry many privileges, so be sure to keep them secret!
 
 You can find the API endpoints for sandbox and production in `Details` section in the right part of this page.
 
-<aside class="notice">
 You may also register a custom webhook per each clinic account (see [Register custom webhook](#register-custom-webhook) for more information). 
-</aside>
 
 ## Clinic Setup
 
 > Sandbox Home and Settings pages:
 
 ```shell
-https://sfs-public.azurewebsites.net
-https://sfs-public.azurewebsites.net/Settings?page=emr
+http://sandbox.smartflowsheet.net
+http://sandbox.smartflowsheet.net/Settings?page=emr
 ```
 
 > Production Home and Settings pages:
@@ -57,6 +55,6 @@ After a new clinic account has been registered in SFS, there is a clinic API Key
 The clinic API key can be obtained by user from `Settings` page on our web-site after registration. We assume that SFS user will be able to register this key in EMR's user interface.
 
 <aside class="notice">
-After registering the account with Smart Flow Sheet it will be assigned a 14-day trial period. To keep the test clinic account 'alive' in a sandbox environment after the trial period expiration, you can simply subscribe to a `Referral Practice` plan by visiting [Billing](https://sfs-public.azurewebsites.net/Billing/Payment/4) web page and providing this card number: `4242 4242 4242 4242`.  
+After registering the account with Smart Flow Sheet it will be assigned a 14-day trial period. To keep the test clinic account 'alive' in a sandbox environment after the trial period expiration, you can simply subscribe to a `Referral Practice` plan by visiting the Billing web page (http://sandbox.smartflowsheet.net/Billing) and providing this card number: 4242 4242 4242 4242.  
 </aside>
 
