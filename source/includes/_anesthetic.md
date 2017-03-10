@@ -83,6 +83,8 @@ As soon as one or several anesthetic sheets have been finalized in Smart Flow ap
 * Expected response with 200 Http code in case of success.
 * In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object
 
+To enable `anesthetics.finalized` events please turn on `EXPORT ANESTHETIC AFTER FINALIZATION TO EMR` on the [Settings](#clinic-setup) page.
+
 ## Retreive anesthetic sheet and anesthetic records reports
 
 > Example Request:
