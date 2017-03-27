@@ -35,6 +35,7 @@ Parameter | Type | Description
 **estimatedDaysOfStay** | Integer | *Optional*. This value will be used to create requested number of days of hospitalization. If this value is not specified then by default 2 days will be created
 **fileNumber** | String | *Optional*. The value of emr file number, that will be shown on a flowsheet. If not specified SFS will populate it with `hospitalizationId`
 **caution** | Boolean | *Optional*. Whether to show `caution stripe` on a flowsheet or not
+**deposit** | String | *Optional*. Client deposit
 **doctorName** | String | *Optional*. The name of the doctor on duty
 **medicId** | String | *Optional*. Alternatively to specifying the `doctorName` field, you can provide the id of the [`medic`](#the-medic-object) object that corresponds to the doctor on duty, and has been registered with the [`appropriate API`](#create-or-update-single-medic) call
 **diseases** | Array | *Optional*. Array of strings. A collection of diseases
