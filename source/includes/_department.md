@@ -9,7 +9,7 @@ This API allows to get the list of departments in the clinic. You may want to us
 Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | *Optional*. Describes the type of the object transferred with the SFS events. Should be assigned `department` value
-**departmentId** | String | **Required**. The ID of the department. You should use this value to specify the department when creating a new [hospitalization](#the-hospitalization-object)
+**departmentId** | Integer | **Required**. The ID of the department. You should use this value to specify the department when creating a new [hospitalization](#the-hospitalization-object)
 **name** | String | **Required**. The unique name of department
 
 <aside class="warning">
