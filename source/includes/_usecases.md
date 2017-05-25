@@ -31,7 +31,7 @@ At the end of hospitalization, the clinic staff will usually discharge the patie
 * [Billing report](#download-the-billing-report)
 * [Notes report](#download-the-notes-report)
 * If the anesthetic sheet was created, completed, and finalized, for the patient, then the associated [Anesthetic Sheet and Anesthetic Records reports](#retreive-anesthetic-sheet-and-anesthetic-records-reports) can be downloaded
-* If client filled out the [Client self check-in form](#download-the-client-self-check-in-form) then it can be downloaded
+* [Form report](/#download-the-form-report) for each form created for the patient. To download all forms upon patient discharge you will need to [get all patients forms](#get-patient-s-forms) first, and then call the [get form values](#get-form-values) API and download the document from the `Form.reportFilePath`
 
 There are two options for discharging the patient in Smart Flow Sheet:
 

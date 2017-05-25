@@ -59,7 +59,7 @@ Parameter | Type | Description
 > Example Request:
 
 ```http
-GET /hospitalization/{hospitalizationId}/forms HTTP/1.1
+GET /hospitalization/emr-hospitalization-id/forms HTTP/1.1
 User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
@@ -80,7 +80,7 @@ This method allows getting all forms for the patient specified by `hospitalizati
 > Example Request:
 
 ```http
-GET /hospitalization/{hospitalizationId}/form/{formGuid} HTTP/1.1
+GET /hospitalization/emr-hospitalization-Id/form/form-guid HTTP/1.1
 User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
@@ -287,12 +287,12 @@ The `forms.created` and `form.updated` events are sent from SFS when one or seve
 
 To enable `forms.created` events please turn on `SEND FORMS TO EMR` on the [Settings](#clinic-setup) page.
 
-## Download the Client Self Check-in form
+## Download the form report
 
 > Example Request:
 
 ```http
-GET /hospitalization/emr-hospitalization-id/checkinformreport HTTP/1.1
+GET /hospitalization/emr-hospitalization-id/formreport/form-guid HTTP/1.1
 User-Agent: MyClient/1.0.0
 Content-Type: application/json
 emrApiKey: "emr-api-key-received-from-sfs"
@@ -300,13 +300,13 @@ clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 timezoneName: Europe/Helsinki
 ```
 
-This method allows to download the Client Self Check-in form from Smart Flow Sheet. 
+This method allows to download the form pdf report generated upon form finalization. 
 
 All the dates in the downloaded report will be represented in the time zone that you **must** explicitly specify in the `timezoneName` header of the HTTP request (e.g. `timezoneName: Europe/Helsinki`). Please visit this [web-page](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the complete list of the time zone names. 
 
-Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created.
+Specify the `hospitalizationId` of the hospitalization object in the EMR. Use the same `hospitalizationId` that was supplied when hospitalization had been created. Also specify the `formGuid` value that uniquely identifies the form. This value can be obtained from `forms.created` [event](#retreive-forms-with-events) or by fetching all the forms for the patient with [this](#get-patient-s-forms) API.
 
-* Url: /hospitalization/{hospitalizationId}/checkinformreport
+* Url: /hospitalization/{hospitalizationId}/formreport/{formGuid}
 * Method: GET
 * Synchronous
 * Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value
