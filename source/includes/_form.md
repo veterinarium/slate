@@ -54,7 +54,50 @@ Parameter | Type | Description
 
 <img src="images/propertysetting.png"> 
 
-## Retreive forms
+## Get patient`s forms 
+
+> Example Request:
+
+```http
+GET /hospitalization/{hospitalizationId}/forms HTTP/1.1
+User-Agent: MyClient/1.0.0
+Content-Type: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
+```
+
+This method allows getting all forms for the patient specified by `hospitalizationId`. This method returns the list of forms objects with **empty** `fields`. To get the form fields for each form please use the [get form values API](#get-form-values).
+
+* Url: /hospitalization/{hospitalizationId}/forms
+* Method: GET
+* Synchronous
+* Returns HTTP status 200 and a collection of [`form`](#the-form-object) objects with empty `fields`
+* In case of error returns the [`Error`](#the-error-object) object
+
+## Get form values
+
+> Example Request:
+
+```http
+GET /hospitalization/{hospitalizationId}/form/{formGuid} HTTP/1.1
+User-Agent: MyClient/1.0.0
+Content-Type: application/json
+emrApiKey: "emr-api-key-received-from-sfs"
+clinicApiKey: "clinic-api-key-taken-from-account-web-page"
+timezoneName: Europe/Helsinki
+```
+
+This method allows getting all fields for the form determined by `formGuid` and `hospitalizationId`.
+
+* Url: /hospitalization/{hospitalizationId}/form/{formGuid}
+* Method: GET
+* Synchronous
+* Returns HTTP status 200 and the [`form`](#the-form-object) object with all the fields 
+* In case of error returns the [`Error`](#the-error-object) object
+
+
+## Retreive forms with events
 
 > Example of `forms.created` event JSON:
 
@@ -233,7 +276,7 @@ Parameter | Type | Description
   }
 }
 ```
-The `forms.created` event is sent from SFS when one or several forms were created. SFS will send [forms](#the-forms-object) object with all information entered into the forms.
+The `forms.created` and `form.updated` events are sent from SFS when one or several forms were created or updated. SFS will send [forms](#the-forms-object) object with all information entered into the forms.
 
 * Url: webhook provided by EMR
 * Method: POST

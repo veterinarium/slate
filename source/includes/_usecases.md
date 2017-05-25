@@ -77,7 +77,7 @@ There are three steps that should be realized to get client’s data entered on 
 
 2. In a second step, you should [attach](#attach-to-existing-hospitalization) your internal records to SFS hospitalization. This is required to receive all other types of events related to this patient, as well as to be able to use any [hospitalization API](#hospitalizations).
 
-3. Finally, Smart Flow Sheet will send the `forms.created` [event](#retreive-forms) that you might consume to get the rest of the data entered by the client during the check-in process.
+3. Finally, Smart Flow Sheet will send the `forms.created` [event](#retreive-forms-with-events) that you might consume to get the rest of the data entered by the client during the check-in process.
 
 **Editing Forms Notifications**
 

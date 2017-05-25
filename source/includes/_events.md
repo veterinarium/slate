@@ -9,7 +9,7 @@ Smart Flow Sheet will send events to EMR on different occasions:
 5. [When patient has been discharged from the whiteboard](#discharge-hospitalization-event)
 6. [When mutliple notes have been entered or removed](#retreive-multiple-notes)
 7. [When anesthetic sheet has been finalized](#finalize-anesthetic-event)
-8. [When the form has been filled in for a patient](#retreive-forms)
+8. [When the form has been filled in for a patient](#retreive-forms-with-events)
 
 In the future there can be other events added to this, e.g. sending flowsheet report or medical records report on patient discharge, etc…
 
