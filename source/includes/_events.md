@@ -55,6 +55,7 @@ Event | Description
 ---------- | -------
 **anesthetics.finalized** | Sent from SFS when clinic stuff finalizes anesthetic sheet(s)
 **forms.created** | Sent from SFS when the form(s) is created and filled in for the patient (e.g. client self check-in form)
+**forms.updated** | Sent from SFS when the form's content is updated or form changes its status to `finalized` or `deleted`
 **hospitalizations.created** | Sent after a patient(s) has been created in Smart Flow Sheet
 **hospitalization.discharged** | Sent after a patient has been discharged from the Smart Flow Sheet whiteboard
 **hospitalizations.discharged** | Sent after multiple patients have been discharged from the Smart Flow Sheet whiteboard
