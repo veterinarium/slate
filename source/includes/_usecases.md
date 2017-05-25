@@ -46,11 +46,26 @@ There are two options for discharging the patient in Smart Flow Sheet:
 Generation of the patient reports may take several minutes for the hospitalizations with a significant number of days of treatment (flowsheets). Subscribing to the `hospitalization.discharged` event is the best way to be notified about operation completion. 
 </aside>
 
-## Client Self Check-in Form
+## Working with the Forms
 
-We offer the “Client Self Check-in Admission form” feature available in the “Smart Flow” iPad app. This means clients have the ability from the iPad to fill out their own information, take a photo of their pet, enter a reason for their visit and update and/or enter the name of their regular clinic from the waiting room. Upon completion of the form, the patient is created in Smart Flow and appears on the whiteboard.
+Smart Flow provides a feature called Customised Hospitalization Forms. It gives the user an ability digitalize the majority of your current paper forms: 
 
-As soon as the patient is created from the Client Self Check-in form, Smart Flow Sheet will notify the EMR by sending `hospitalizations.created` and `forms.created` events. You might want to consume and handle these events to:
+* Surgical consent
+* Euthanasia consent
+* Admission
+* and many more...
+
+To make use of forms and understand how this feature works please read [this article](https://forum.smartflowsheet.com/solution/articles/13000031853-smart-flow-customizable-hospital-forms-). 
+There are two form types in Smart Flow that user may create:
+
+1. those that could be used to create a patient in Smart Flow (e.g. Admission form). These forms have `Show on Main Screen` setting set to YES on `Settings/Forms` web page.
+2. those that do not provide such option, but rather can be added to existing patient from Smart Flow user interface.
+
+**Creating Patients from Forms**
+
+By default Smart Flow Sheet provides a couple of forms that allow to create patients from “Smart Flow” iPad app. This means clients have the ability from the iPad to fill out their own information, take a photo of their pet, enter a reason for their visit and update and/or enter the name of their regular clinic from the waiting room. Upon completion of the form, the patient is created in Smart Flow and appears on the whiteboard.
+
+As soon as the patient is created from the form, Smart Flow Sheet will notify the EMR by sending `hospitalizations.created` and `forms.created` events. You might want to consume and handle these events to:
 
 * Automatically register both the client and patient into the EMR.
 
@@ -58,11 +73,27 @@ As soon as the patient is created from the Client Self Check-in form, Smart Flow
 
 There are three steps that should be realized to get client’s data entered on the admission form:
 
-1. The EMR should [consume](#get-notified-about-new-hospitalizations) the `hospitalizations.created` event that is sent from Smart Flow Sheet as soon as a patient is added from the Client Self Check-in Admission form. The `hospitalization` object will be provided with the event. When the event is received both the client and patient records might be created in the EMR.
+1. The EMR should [consume](#get-notified-about-new-hospitalizations) the `hospitalizations.created` event that is sent from Smart Flow Sheet as soon as a patient is added from the form. The `hospitalization` object will be provided with the event. When the event is received both the client and patient records might be created in the EMR.
 
 2. In a second step, you should [attach](#attach-to-existing-hospitalization) your internal records to SFS hospitalization. This is required to receive all other types of events related to this patient, as well as to be able to use any [hospitalization API](#hospitalizations).
 
 3. Finally, Smart Flow Sheet will send the `forms.created` [event](#retreive-forms) that you might consume to get the rest of the data entered by the client during the check-in process.
+
+**Editing Forms Notifications**
+
+When user edits (changes the content of the form or its status to `finalized`) or deletes a form then Smart Flow Sheet fires the `forms.updated` event. 
+
+**Parsing Custom Forms and Properties**
+
+Smart Flow Sheet allows users to create a custom set of forms and properties from the `Settings/Forms` and `Settings/Properties` web pages. If you want to parse the data from these custom forms then you should utilize `Internal Name` attributes when creating forms (on the Settings/Forms web page) and properties (on the Settings/Properties web page).
+
+<img src="images/formsetting.png"> 
+
+The value of `Internal Name` attribute ('checkinform' on a picture above) of the form will be transferred with the `name` property of the [form object](#the-form-object).
+
+<img src="images/propertysetting.png"> 
+
+The value of `Internal Name` attribute of the property ('pet_name' on a picture above) will be transferred with the `name` property of the [formfield object](#the-formfield-object).
 
 ## Inventory Import
 
