@@ -33,6 +33,7 @@ Parameter | Type | Description
 **name** | String | A unique identifier of the form type. This value is specified on the `Settings/Forms` web page in the `Internal Name` attribute of the form (e.g. 'checkinform' on a picture below) 
 **deleted** | Boolean | True - if the form has been deleted by the user; otherwise - false
 **finalized** | Boolean | True - if the form has been finalized by the user; otherwise - false. If the patient is created from the form, then this field will return true
+**reportFilePath** | String | The path to the form pdf report file that has been generated during form finalization
 **title** | String | The title of the form (e.g. "Admission form")
 **fields** | Array | The array of `formfield` objects. See description of the `formfield` object [below](#the-formfield-object)
 

@@ -82,6 +82,7 @@ There are three steps that should be realized to get client’s data entered on 
 **Editing Forms Notifications**
 
 When user edits (changes the content of the form or its status to `finalized`) or deletes a form then Smart Flow Sheet fires the `forms.updated` event. 
+When user finalizes the form then Smart Flow Sheet generates a pdf report for this form.
 
 **Parsing Custom Forms and Properties**
 
