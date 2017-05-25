@@ -8,7 +8,7 @@ The are three objects used by Smart Flow Sheet to notify EMR when forms are fill
 
 * `formfield`
 
-All objects are sent with the asynchronous `forms.created` event when one or several forms has been entered.
+All objects are sent with the asynchronous `forms.created` or `forms.udpated` events when one or several forms has been entered or changed.
 
 ## The forms object
 
@@ -30,9 +30,13 @@ Parameter | Type | Description
 **objectType** | String | Describes the type of the object transferred with the SFS events (e.g. `forms.created`). Should be assigned `form` value
 **formGuid** | String | **Required**. A unique internal identifier of the form
 **hospitalizationId** | String | Hospitalization external id (which was provided with hospitalization creation)
-**name** | String | A unique identifier of the form type. (E.g. `checkinform` is the default value of the `name` attribute for "Client Self Check-in form") 
-**title** | String | The title of the form (e.g. "Client Self Check-in")
+**name** | String | A unique identifier of the form type. This value is specified on the `Settings/Forms` web page in the `Internal Name` attribute of the form (e.g. 'checkinform' on a picture below) 
+**deleted** | Boolean | True - if the form has been deleted by the user; otherwise - false
+**finalized** | Boolean | True - if the form has been finalized by the user; otherwise - false. If the patient is created from the form, then this field will return true
+**title** | String | The title of the form (e.g. "Admission form")
 **fields** | Array | The array of `formfield` objects. See description of the `formfield` object [below](#the-formfield-object)
+
+<img src="images/formsetting.png"> 
 
 ## The formfield object
 
@@ -41,10 +45,13 @@ Parameter | Type | Description
 Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | Describes the type of the object transferred with the SFS events (e.g. `forms.created`). Should be assigned `formfield` value
-**name** | String | A unique identifier of the form field
+**name** | String | A unique identifier of the form field. This value is specified on the `Settings/Properties` web page in the `Internal Name` attribute of the property (e.g. 'pet_name' on a picture below) 
 **title** | String | Field label (the one that users sees while filling in the form field)
 **contentType** | String | This field describes the type of content of the `value` field (e.g. `text/plain`, `image/jpg`)
-**value** | String | The string value of the form field
+**value** | String | The string value of the form field 
+**values** | Array | The array of string values selected from drop-down list with multiple selection option (If the array is not empty that `value` field above should be ignored.)
+
+<img src="images/propertysetting.png"> 
 
 ## Retreive forms
 
