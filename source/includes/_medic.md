@@ -44,10 +44,10 @@ Parameter | Type | Description
 
 Parameter | Type | Description
 ---------- | ------- | -------
-**objectType** | String | *Optional*. Describes the type of the object transferred with the SFS events (e.g. `medics.imported`). Should be assigned `medic` value
-**medicId** | String | **Required**. The EMR internal ID of the medic 
-**name** | String | **Required**. The unique name of the medic for a particular `medicType`
-**medicType** | String | *Required*. The type of the medic imported in SFS. Should always be assigned the `doctor` value. (There will be `technician` and other types supported in the future). 
+**objectType** | String | *Optional*. Describes the type of the object transferred with the SFS events (e.g. `medics.imported`). Should be assigned `medic` value.
+**medicId** | String | **Required**. The EMR internal ID of the medic.
+**name** | String | **Required**. The unique name of the medic for a particular `medicType`.
+**medicType** | String | *Required*. The type of the medic imported in SFS. Can be one of the following: 1. `doctor`, 2. `technician`, 3. `anesthetist`. 
 **asyncOperationStatus** | Integer | *Optional*. The status of the asynchronous operation for the medic object. This will be filled in by SFS when sending the `medics.imported` event. Should be: 1. `less than 0` - error occured; 2. `greater or equal 0` - operation succeed.
 **asyncOperationMessage** | String | *Optional*. May contain the error message in case the `asyncOperationStatus` field represents the error (less than 0).
 
