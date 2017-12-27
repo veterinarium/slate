@@ -48,6 +48,7 @@ Parameter | Type | Description
 **objectType** | String | *Optional*. Describes the type of the object transferred with the SFS events (e.g. `inventory.imported`). Should be assigned `iventoryitem` value
 **id** | String | **Required**. The EMR internal ID of the inventory item
 **name** | String | **Required**. The unique name of the inventory item
+**customField** | String | *Optional*. The custom string data that you may want to store with the inventory item
 **concentration** | Double | *Optional*. The concentration value for the given medication. This value should not be specified if the inventory item is not a medication.
 **concentrationUnits** | String | *Required if the concentration value is specified. Otherwise optional.* Units that define the amount of drug. There is no limitation on what data will be transferred. This value should not be specified if inventory item is not a medication.
 **concentrationVolume** | String | *Required if the concentration value is specified. Otherwise optional.* Units for the volume. There is no limitation on what data will be transferred. This value should not be specified if inventory item is not a medication.
