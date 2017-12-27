@@ -24,7 +24,16 @@ After the patient has been submitted to Smart Flow Sheet, you may want to query 
 
 ## Discharging Patients
 
-At the end of hospitalization, the clinic staff will usually discharge the patient. During this step, Smart Flow Sheet generates a set of documents (in pdf format) that your practice management software might want to attach to the patient record. Below is the list of such reports with references of how to download them using the API:
+At the end of hospitalization, the clinic staff will usually discharge the patient. During this step, Smart Flow Sheet generates a set of documents (in pdf format) that your practice management software might want to attach to the patient record. The list of documents to attach is determined by the user on the Settings/Documents Management page.
+
+### Documents Management in Smart Flow
+
+From `Settings / Documents Management` page (see image below) the user will be able to turn on/off exporting of the documents after patient discharge. If the user disables `EXPORT DOCUMENTS TO EMR` option then:
+
+* `reportPath` fields in [hospitalization](#the-hospitalization-object), [anesthetic](#the-anesthetic-object), [form](#the-form-object) objects will be NULL;
+* access to the documents with API will return 465 with the message *"The manager turned off the document on the Settings / Documents management page"*;
+
+If the user enables `EXPORT DOCUMENTS TO EMR` option then they may specify which documents to export to EMR in `Files To Retain After Discharge` section. Below is the list of such reports with references of how to download them using the API:
 
 * [Flowsheet report](#download-the-flowsheet-report)
 * [Medical records report](#download-the-medical-records-report)
@@ -32,6 +41,14 @@ At the end of hospitalization, the clinic staff will usually discharge the patie
 * [Notes report](#download-the-notes-report)
 * If the anesthetic sheet was created, completed, and finalized, for the patient, then the associated [Anesthetic Sheet and Anesthetic Records reports](#retreive-anesthetic-sheet-and-anesthetic-records-reports) can be downloaded
 * [Form report](/#download-the-form-report) for each form created for the patient. To download all forms upon patient discharge you will need to [get all patients forms](#get-patient-s-forms) first, and then call the [get form values](#get-form-values) API and download the document from the `Form.reportPath`
+
+For those documents that are not retained after discharge the appropriate API will return 465 error with the message *"The manager turned off the document on the Settings / Documents management page"* (as well as `reportPath` field in the appropriate object will be NULL).
+
+<img src="images/docsmanagement.png"> 
+
+If the user sets `MERGE REPORTS INTO ONE PDF` setting to YES, then `hospitalization.reportPath` as well as [download the flowsheet report API](#download-the-flowsheet-report) will return the *merged* pdf file, that will include all the documents specified in `Files To Retain After Discharge` section. This option allows you download only one pdf file that will include all documents chosen by the user rather than implementing all Smart Flow APIs mentioned above to access each document separately.
+
+### Discharging Patients
 
 There are two options for discharging the patient in Smart Flow Sheet:
 

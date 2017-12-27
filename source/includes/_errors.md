@@ -5,6 +5,8 @@
 ```shell
 200 OK - Everything worked as expected.
 
+204 No Content - May happen when trying to access the patient report that was not generated for the patient.
+
 400 Bad Request - Often missing a required parameter.
 
 401 Unauthorized - No valid emrApiKey or clinicApiKey provided.
@@ -19,7 +21,9 @@
 
 429 Too Many Requests - May happen when trying to upload a lot of inventory items. Need to slown down. 
 
-500, 502, 503, 504 Server errors - something went wrong on SFS`s end
+465 Access to the Document Denied - Heppens when manager turns off the document on the `Settings / Documents Management` page.
+
+500, 502, 503, 504 Server errors - something went wrong on SFS`s end.
 ```
 
 Smart Flow Sheet uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing), and codes in the 5xx range indicate an error with SFS's servers.
@@ -44,7 +48,7 @@ Accept: application/json
 }
 ```
 
-Smart Flow Sheet may send the Error object in the response to the API methods that failed with the 4xx HTTP status codes. 
+Smart Flow Sheet may send the Error object in the response to the API methods that failed with the [4xx HTTP status codes](#errors). 
 
 Also, SFS expects EMR to send the Error object (optionally) in the response to the event calls that fail together with the 4xx HTTP status codes. 
 
