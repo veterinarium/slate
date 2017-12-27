@@ -55,6 +55,6 @@ After a new clinic account has been registered in SFS, there is a clinic API Key
 The clinic API key can be obtained by user from `Settings` page on our web-site after registration. We assume that SFS user will be able to register this key in EMR's user interface.
 
 <aside class="notice">
-After registering the account with Smart Flow Sheet it will be assigned a 14-day trial period. To keep the test clinic account 'alive' in a sandbox environment after the trial period expiration, you can simply subscribe to a `Referral Practice` plan by visiting the Billing web page (https://sandbox.smartflowsheet.com/Billing) and providing this card number: 4242 4242 4242 4242.  
+After registering the account with Smart Flow Sheet it will be assigned a 14-day trial period. To keep the test clinic account 'alive' in a sandbox environment after the trial period expiration, you can simply subscribe to a `Build Your Own` plan by visiting the Billing web page (https://sandbox.smartflowsheet.com/Billing) and providing this card number: 4242 4242 4242 4242.  
 </aside>
 
