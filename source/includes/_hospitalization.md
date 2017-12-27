@@ -206,6 +206,8 @@ When a patient is created manually by the user with Smart Flow Sheet user interf
 * Returns HTTP status 200 in case the `hospitalizationId` has been successfully attached to the hospitalization located by `hospitalizationGuid`
 * In case of error returns the [`Error`](#the-error-object) object
 
+Upon attachment to the existing hospitalization, Smart Flow will collect all treatments recorded so far for this hospitalization and send them with the `treatments.records_entered` [event](#retreive-multiple-medical-records).
+
 ## Delete hospitalization
 
 > Example Request:
