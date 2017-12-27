@@ -46,7 +46,7 @@ Parameter | Type | Description
 Parameter | Type | Description
 ---------- | ------- | -------
 **objectType** | String | Describes the type of the object transferred with the SFS events (e.g. `forms.created`). Should be assigned `formfield` value
-**name** | String | A unique identifier of the form field. This value is specified on the `Settings/Properties` web page in the `Internal Name` attribute of the property (e.g. 'pet_name' on a picture below) 
+**name** | String | A unique identifier of the form field. This value is specified on the `Settings/Forms` web page in the `Internal Name` attribute of the property (e.g. 'pet_name' on a picture below) 
 **title** | String | Field label (the one that users sees while filling in the form field)
 **contentType** | String | This field describes the type of content of the `value` field (e.g. `text/plain`, `image/jpg`)
 **value** | String | The string value of the form field 

@@ -86,7 +86,7 @@ When the user finalizes the form then Smart Flow Sheet generates a pdf report fo
 
 **Parsing Custom Forms and Properties**
 
-Smart Flow Sheet allows users to create a custom set of forms and properties from the `Settings/Forms` and `Settings/Properties` web pages. If you want to parse the data from these custom forms then you should utilize `Internal Name` attributes when creating forms (on the Settings/Forms web page) and properties (on the Settings/Properties web page).
+Smart Flow Sheet allows users to create a custom set of forms and properties from the `Settings/Forms` web page. If you want to parse the data from these custom forms then you should utilize `Internal Name` attributes when creating forms and properties.
 
 <img src="images/formsetting.png"> 
 
