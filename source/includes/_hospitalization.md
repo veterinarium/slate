@@ -287,8 +287,6 @@ As soon as one or several patients have been discharged from the Smart Flow Shee
 
 Every `hospitalization` object transferred with these events will contain the path to the flowsheet report pdf file in the `reportPath` field. If for some reason the value of this field is empty then you may explicitly [download the flowsheet report](#download-the-flowsheet-report).
 
-To enable `hospitalizations.discharged` events please turn on `EXPORT FLOWSHEET AFTER DISCHARGE TO EMR` on the [Settings](#clinic-setup) page.
-
 ## Get notified about new hospitalizations
 
 > Example of `hospitalizations.created` event JSON:

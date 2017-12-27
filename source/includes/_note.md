@@ -77,5 +77,3 @@ Parameter | Type | Description
 * Transfers [`notes`](#the-notes-object) object included in the `event` object
 * Expected response with 200 Http code in case of success.
 * In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object
-
-To enable `notes.entered` events please turn on `SEND NOTES TO EMR` on the [Settings](#clinic-setup) page.

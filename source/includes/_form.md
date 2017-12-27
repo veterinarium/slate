@@ -285,8 +285,6 @@ The `forms.created` and `form.updated` events are sent from SFS when one or seve
 * Expected response with 200 Http code in case of success.
 * In case of the error, EMR should return 400 Http code and optionally the [`Error`](#the-error-object) object
 
-To enable `forms.created` events please turn on `SEND FORMS TO EMR` on the [Settings](#clinic-setup) page.
-
 ## Download the form report
 
 > Example Request:
