@@ -31,7 +31,7 @@ Parameter | Type | Description
 **treatmentTemplateName** | String | *Optional* The name of the treatment template to be used for created hospitalization. If not specified then the "Default" template will be used.
 **temperatureUnits** | String | *Optional*. Units for the temperature. Can be `F` or `C`. If not specified then clinic’s default temperature units will be used
 **weightUnits** | String | *Optional*. Units for the weight. Can be `kg` or `lbs`. If not specified then clinic’s default weight units will be used
-**weight** | Double | **Required**. Weight of the patient. Smart Flow Sheet requires weight to be specified for every patient from the moment hospitalization is created
+**weight** | Double | *Optional*. Weight of the patient
 **estimatedDaysOfStay** | Integer | *Optional*. This value will be used to create requested number of days of hospitalization. If this value is not specified then by default 2 days will be created
 **fileNumber** | String | *Optional*. The value of emr file number, that will be shown on a flowsheet. If not specified SFS will populate it with `hospitalizationId`
 **caution** | Boolean | *Optional*. Whether to show `caution stripe` on a flowsheet or not
