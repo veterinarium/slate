@@ -78,7 +78,7 @@ emrApiKey: "emr-api-key-received-from-sfs"
 clinicApiKey: "clinic-api-key-taken-from-account-web-page"
 ```
 
-You may use this API to register a custom webhook that will receive events only for the specified clinic account. You may use this webhook for a group of clinics also. 
+You may use this API to register a custom HTTPS webhook that will receive events only for the specified clinic account. You may use this webhook for a group of clinics also. 
 
 * Url: /account/webhook?url=your_custom_url
 * Method: POST
