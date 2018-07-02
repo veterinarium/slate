@@ -47,10 +47,6 @@ Parameter | Type | Description
 
 Smart Flow Sheet provides a user interface option for the user to explicitly include or exclude the treatment from being included in the billing (see image below). This option is only shown for the parameters mapped to the EMR [inventory items](#the-inventoryitem-object). If the user sets "Billing" option to ON, then `true` is provided with the `billed` field. Otherwise, Smart Flow sends `false`.
 
-<aside class="warning">
-For the backward compatibility with the current implementation of the treatment events interface, we 'nullify' the value of the `inventoryId` field for the treatments explicitly excluded from the billing.
-</aside>
-
 <img src="images/billingoption.png"> 
 
 ## Retreive single medical record
