@@ -41,7 +41,7 @@ Parameter | Type | Description
 **diseases** | Array | *Optional*. Array of strings. A collection of diseases
 **cageNumber** | String | *Optional*. The cage number. This value will be shown on the whiteboard near patient name.
 **color** | String | *Optional*. The RGB hex color code (eg. #439FE0). This value is used to color patient`s info panel on the whiteboard and flowsheets.
-**reportPath** | String | *Optional*. The path to the flowsheet report file that has been generated during patient discharge
+**reportPath** | String | *Optional*. The path to the flowsheet report or the `merged` report file that has been generated during patient discharge. Please read about [Documents Management in Smart Flow](#discharging-patients) for more information
 **status** | String | *Optional*. The status of the hospitalization. This field will be transferred with the SFS events. Can be `active`, `deleted` or `discharged`.
 **patient** | Patient | *Required when creating new hospitalization. Optional if used to update existing hospitalization*. The [`patient`](#the-patient-object) object
 **resuscitate** | String | *Optional* Can be `dnr`, `bls` or `als`. Default value is `bls`.
@@ -365,6 +365,11 @@ Specify the `hospitalizationId` of the hospitalization object in the EMR. Use th
 * Synchronous
 * Returns the pdf report with the output stream. The Content-Type header will contain the `application/pdf` value
 * In case of error returns the [`Error`](#the-error-object) object
+
+<aside class="notice">
+If the user sets `MERGE REPORTS INTO ONE PDF` setting to YES on a `Settings / Documents Management` page then this API will return the merged pdf file that will include all the documents specified in `Files To Retain After Discharge` section.
+</aside>
+For more information about merging reports functionality please take a look at [Documents Management in Smart Flow](#discharging-patients) section.
 
 ## Download the Medical Records report
 
