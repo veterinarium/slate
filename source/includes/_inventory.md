@@ -52,6 +52,7 @@ Parameter | Type | Description
 **concentration** | Double | *Optional*. The concentration value for the given medication. This value should not be specified if the inventory item is not a medication.
 **concentrationUnits** | String | *Required if the concentration value is specified. Otherwise optional.* Units that define the amount of drug. There is no limitation on what data will be transferred. This value should not be specified if inventory item is not a medication.
 **concentrationVolume** | String | *Required if the concentration value is specified. Otherwise optional.* Units for the volume. There is no limitation on what data will be transferred. This value should not be specified if inventory item is not a medication.
+**inDispensingMachine** | Boolean | *Optional*. Pass `true` if you use an external dispensing machine (e.g. Cubex) to capture charges for this item. In this case, Smart Flow will not send `treatment.records_entered` [events](#retreive-single-medical-record) during treatment execution
 **asyncOperationStatus** | Integer | *Optional*. The status of the asynchronous operation for the inventory item. This will be filled in by SFS when sending the `inventoryitems.imported` event. Should be: 1. `less than 0` - error occured; 2. `greater or equal 0` - operation succeed.
 **asyncOperationMessage** | String | *Optional*. May contain the error message in case the `asyncOperationStatus` field represents the error (less than 0).
 
